@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Home extends React.Component {
+class Discover extends React.Component {
   constructor(props) {
     super(props);
     this.state = {  }
@@ -8,10 +8,10 @@ class Home extends React.Component {
   render() { 
     return (  
       <div>
-        <h1>HOMEPAGE</h1>
+        <h1>DISCOVER PAGE</h1>
       </div>
     );
   }
 }
  
-export default Home;
+export default Discover;

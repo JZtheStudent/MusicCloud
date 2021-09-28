@@ -1,11 +1,11 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 import Nav from './nav/nav';
 import Modal from './modal/modal';
-import HomeContainer from './home/home_container'
+import DiscoverContainer from './discover/discover_container'
 
 
-const App = ({currentUser, logout, openModal}) => {
+const App = () => {
   return (  
     <div>
       <Modal />
@@ -14,9 +14,10 @@ const App = ({currentUser, logout, openModal}) => {
       </header>
     
       <Switch>
-        <Route exact path="/" component={HomeContainer} />
+        <Route exact path="/discover" component={DiscoverContainer} />
+        <Redirect to="/discover" />
       </Switch>
-
+    
     </div>
   );
 };
