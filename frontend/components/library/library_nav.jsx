@@ -18,6 +18,15 @@ class LibraryNav extends React.Component {
         <Link to="/playlists">
           <h2>Playlists</h2>
         </Link>
+        <Link to="/albums">
+          <h2>Albums</h2>
+        </Link>
+        <Link to="/following">
+          <h2>Following</h2>
+        </Link>
+        <Link to="/history">
+          <h2>History</h2>
+        </Link>
       </div>
     );
   }
