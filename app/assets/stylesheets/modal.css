@@ -24,6 +24,11 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
+}
+
+.login-form > * {
+  margin-top: 5px;
 }
 
 .login-input {
@@ -35,6 +40,11 @@
   padding: 20px;
   background: white;
   position: relative;
+  text-align: center;
+}
+
+.demo-login-button {
+  width: 50%;
 }
 
 .close-x {
@@ -42,4 +52,8 @@
   top: 5px;
   right: 5px;
   cursor: pointer;
+}
+
+.form-submit-button {
+  width: 50%;
 }
