@@ -4,8 +4,8 @@ import { logout } from "../../actions/session_actions";
 import { openModal } from "../../actions/modal_actions";
 import NavAuth from "./nav_auth";
 
-const mapStateToProps = ({session}) => ({
-  currentUser: session.id
+const mapStateToProps = ({session, entities}) => ({
+  currentUser: entities.user[session.id]
 });
 
 const mapDispatchToProps = dispatch => ({

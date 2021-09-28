@@ -75,8 +75,8 @@ var receiveErrors = function receiveErrors(errors) {
 };
 var login = function login(user) {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.login(user).then(function (user) {
-      return dispatch(receiveCurrentUser(user));
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.login(user).then(function (currentUser) {
+      return dispatch(receiveCurrentUser(currentUser));
     });
   };
 };
@@ -398,9 +398,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(_ref) {
-  var session = _ref.session;
+  var session = _ref.session,
+      entities = _ref.entities;
   return {
-    currentUser: session.id
+    currentUser: entities.user[session.id]
   };
 };
 
