@@ -38,18 +38,19 @@ class SessionForm extends React.Component {
 
   render() { 
     return (  
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <div className="login-form-container">
+        <form  className="login-form-box" onSubmit={this.handleSubmit}>
           <h2>Welcome to MusicCloud!</h2>
           Please {this.props.formType} or {this.props.otherForm}
-          <div onClick={this.props.closeModal}>X</div>
+          <div onClick={this.props.closeModal} className="close-x">X</div>
           {/* {this.renderErrors()} */}
-          <div>
+          <div className="login-form">
             <label>Username:
               <input
                 type="text"
                 value={this.state.username}
                 onChange={this.update('username')}
+                className="login-input"
               />
             </label>
             {
@@ -59,17 +60,19 @@ class SessionForm extends React.Component {
                     type="text"
                     value={this.state.email}
                     onChange={this.update('email')}
+                    className="login-input"
                   />
-                  <br/>
+                  
                 </label> 
                  :
-                <br />
+                <div></div>
             }
             <label>Password:
               <input 
                 type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
+                className="login-input"
               />
             </label>
             <br />
