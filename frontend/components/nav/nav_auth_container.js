@@ -5,7 +5,7 @@ import { openModal } from "../../actions/modal_actions";
 import NavAuth from "./nav_auth";
 
 const mapStateToProps = ({session}) => ({
-  currentUser: session.currentUser
+  currentUser: session.id
 });
 
 const mapDispatchToProps = dispatch => ({
