@@ -1,0 +1,8 @@
+.library-nav {
+  display: flex;
+}
+
+.library-nav > * {
+  margin-left: 15px;
+}
+
