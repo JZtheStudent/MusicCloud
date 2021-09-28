@@ -2,8 +2,9 @@ import React from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import Nav from './nav/nav';
 import Modal from './modal/modal';
-import DiscoverContainer from './discover/discover_container'
-
+import DiscoverContainer from './discover/discover_container';
+import StreamContainer from './stream/stream_container';
+import LibraryContainer from './library/library_nav_container'
 
 const App = () => {
   return (  
@@ -15,6 +16,9 @@ const App = () => {
     
       <Switch>
         <Route exact path="/discover" component={DiscoverContainer} />
+        <Route exact path="/stream"  component={StreamContainer} />
+        <Route exact path="/library" component={LibraryContainer}/>
+        
         <Redirect to="/discover" />
       </Switch>
     

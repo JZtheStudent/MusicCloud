@@ -7,3 +7,11 @@
   display: flex;
   
 }
+
+.page-nav {
+  display: flex;
+}
+
+.page-nav-item {
+  margin-left: 15px;
+}
