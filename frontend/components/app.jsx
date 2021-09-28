@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
+import {AuthRoute, ProtectedRoute} from '../util/route_utils';
 import Nav from './nav/nav';
 import Modal from './modal/modal';
 import DiscoverContainer from './discover/discover_container';
@@ -21,13 +22,13 @@ const App = () => {
     
       <Switch>
         <Route exact path="/discover" component={DiscoverContainer} />
-        <Route exact path="/stream"  component={StreamContainer} />
-        <Route exact path="/library" component={LibraryContainer}/>
-        <Route exact path="/likes" component={LikesContainer} />
-        <Route exact path="/playlists" component={PlaylistsContainer} />
-        <Route exact path="/albums" component={AlbumsContainer} />
-        <Route exact path="/following" component={FollowingContainer} />
-        <Route exact path="/history" component={HistoryContainer} />
+        <ProtectedRoute exact path="/stream"  component={StreamContainer} />
+        <ProtectedRoute exact path="/library" component={LibraryContainer}/>
+        <ProtectedRoute exact path="/likes" component={LikesContainer} />
+        <ProtectedRoute exact path="/playlists" component={PlaylistsContainer} />
+        <ProtectedRoute exact path="/albums" component={AlbumsContainer} />
+        <ProtectedRoute exact path="/following" component={FollowingContainer} />
+        <ProtectedRoute exact path="/history" component={HistoryContainer} />
         <Redirect to="/discover" />
       </Switch>
     
