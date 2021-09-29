@@ -8,7 +8,10 @@ class ProfileHeader extends React.Component {
   render() { 
     return (  
       <div className="profile-header">
-        <h1>ProfileHeader</h1>
+        <div className="profile-background-no-image">
+          <h1>Hi</h1>
+        </div>
+        
       </div>
     );
   }
