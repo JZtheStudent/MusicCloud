@@ -19,6 +19,13 @@ header {
   color: white;
 }
 
+.main-page-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
+.main-page-inner-container {
+  width: 65%;
 
-
+}

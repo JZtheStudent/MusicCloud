@@ -42,9 +42,44 @@
 }
 
 .page-nav-item {
-  margin-left: 15px;
+  color: #ccc;
+  display: block;
+  padding: 15px 0;
+  height: 46px;
+  box-sizing: border-box;
+  text-align: center;
+  width: 104px;
+  border-right: 1px solid #111;
+  text-decoration: none;
+  font-family: Interstate,Lucida Grande,Arial,sans-serif;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
-.personal-greeting {
+.page-nav-item:hover {
+  color: white;
+}
+
+.right-nav {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.greeting {
+  color: #ccc;
+  display: block;
+  padding: 15px 0;
+  height: 46px;
+  box-sizing: border-box;
+  text-align: center;
+  width: 104px;
+  text-decoration: none;
+  font-family: Interstate,Lucida Grande,Arial,sans-serif;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.auth-button {
+  margin-left: 5px;
 }

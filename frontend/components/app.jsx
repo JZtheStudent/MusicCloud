@@ -20,17 +20,23 @@ const App = () => {
         <Nav/>
       </header>
     
-      <Switch>
-        <Route exact path="/discover" component={DiscoverContainer} />
-        <ProtectedRoute exact path="/stream"  component={StreamContainer} />
-        <ProtectedRoute exact path="/library" component={LibraryContainer}/>
-        <ProtectedRoute exact path="/likes" component={LikesContainer} />
-        <ProtectedRoute exact path="/playlists" component={PlaylistsContainer} />
-        <ProtectedRoute exact path="/albums" component={AlbumsContainer} />
-        <ProtectedRoute exact path="/following" component={FollowingContainer} />
-        <ProtectedRoute exact path="/history" component={HistoryContainer} />
-        <Redirect to="/discover" />
-      </Switch>
+      <div className="main-page-container">
+        <div className="main-page-inner-container">
+          <Switch >
+            <Route exact path="/discover" component={DiscoverContainer} />
+            <ProtectedRoute exact path="/stream"  component={StreamContainer} />
+            <ProtectedRoute exact path="/library" component={LibraryContainer}/>
+            <ProtectedRoute exact path="/likes" component={LikesContainer} />
+            <ProtectedRoute exact path="/playlists" component={PlaylistsContainer} />
+            <ProtectedRoute exact path="/albums" component={AlbumsContainer} />
+            <ProtectedRoute exact path="/following" component={FollowingContainer} />
+            <ProtectedRoute exact path="/history" component={HistoryContainer} />
+            <Redirect to="/discover" />
+          </Switch>
+        </div>
+        
+      </div>
+
     
     </div>
   );

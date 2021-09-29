@@ -1,21 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NavAuth = ({currentUser, logout, openModal}) => {
   
   const sessionLinks = () => (
-    <nav>
-      <button onClick={() => openModal('login')}>Login</button>
-      <button onClick={() => openModal('signup')}>Signup</button>
+    <nav className="right-nav"> 
+      <button className="auth-button" onClick={() => openModal('login')}>Login</button>
+      <button className="auth-button" onClick={() => openModal('signup')}>Signup</button>
     </nav>
   )
   
   const personalGreeting = () => (
-    <nav className="personal-greeting">
-      <h2>Hi, {currentUser.username}!</h2>
-      <button onClick={logout}>Log Out</button>
+    <nav className="right-nav">
+      <h2 className="greeting">Hi, 
+        <Link to="profile">{currentUser.username}</Link>
+      !</h2>
+      <button className="auth-button" onClick={logout}>Log Out</button>
     </nav>
   )
-
+  
   return (  
     currentUser ? 
     personalGreeting(currentUser, logout) :

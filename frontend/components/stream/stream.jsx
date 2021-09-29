@@ -1,6 +1,9 @@
 import React from 'react';
 
 class Stream extends React.Component {
+  componentDidMount() {
+    console.log('stream');
+  }
   constructor(props) {
     super(props);
     this.state = {  }
