@@ -1325,6 +1325,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     }, "Signup"),
     closeModal: function closeModal() {
       return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__.closeModal)());
+    },
+    loginDemo: function loginDemo() {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__.login)({
+        username: 'demo-user',
+        password: '123456'
+      }));
     }
   };
 };
@@ -1414,10 +1420,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     key: "handleDemoLogin",
     value: function handleDemoLogin(e) {
       e.preventDefault();
-      this.props.processForm({
-        username: 'demo-user',
-        password: '123456'
-      }).then(this.props.closeModal);
+      this.props.loginDemo().then(this.props.closeModal);
     }
   }, {
     key: "renderErrors",
@@ -1516,6 +1519,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     }, "Login"),
     closeModal: function closeModal() {
       return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__.closeModal)());
+    },
+    loginDemo: function loginDemo() {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__.login)({
+        username: 'demo-user',
+        password: '123456'
+      }));
     }
   };
 };

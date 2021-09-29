@@ -27,7 +27,7 @@ class SessionForm extends React.Component {
 
   handleDemoLogin(e) {
     e.preventDefault();
-    this.props.processForm({username: 'demo-user', password: '123456'}).then(this.props.closeModal);
+    this.props.loginDemo().then(this.props.closeModal);
   }
   
   renderErrors() {
@@ -41,7 +41,7 @@ class SessionForm extends React.Component {
       </ul>
     );
   }
-
+  
   render() { 
     return (  
       <div className="login-form-container">
