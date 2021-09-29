@@ -136,7 +136,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_nav_nav__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_nav_nav__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
     exact: true,
     path: "/discover",
     component: _discover_discover_container__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -1049,10 +1051,16 @@ var Nav = function Nav() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "nav-bar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "inner-nav-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "left-nav"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    className: "logo-link",
     to: "/"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Music Cloud")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_page_nav_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_nav_auth_container__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    className: "logo-img",
+    src: window.logoURL
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_page_nav_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_nav_auth_container__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Nav);
@@ -1091,7 +1099,9 @@ var NavAuth = function NavAuth(_ref) {
   };
 
   var personalGreeting = function personalGreeting() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hgroup", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Hi, ", currentUser.username, "!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
+      className: "personal-greeting"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Hi, ", currentUser.username, "!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: logout
     }, "Log Out"));
   };
@@ -38706,6 +38716,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "root",
     store: store
   }), root);
   window.getState = store.getState;

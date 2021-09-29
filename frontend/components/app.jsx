@@ -14,7 +14,7 @@ import HistoryContainer from './library/history_container';
 
 const App = () => {
   return (  
-    <div>
+    <div className="app">
       <Modal />
       <header>
         <Nav/>

@@ -10,10 +10,10 @@ const NavAuth = ({currentUser, logout, openModal}) => {
   )
   
   const personalGreeting = () => (
-    <hgroup>
+    <nav className="personal-greeting">
       <h2>Hi, {currentUser.username}!</h2>
       <button onClick={logout}>Log Out</button>
-    </hgroup>
+    </nav>
   )
 
   return (  
