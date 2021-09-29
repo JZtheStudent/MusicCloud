@@ -12,7 +12,10 @@ class Profile extends React.Component {
     return (  
       <div>
         <ProfileHeaderContainer />
+
+      
       </div>
+      
       
       
     );

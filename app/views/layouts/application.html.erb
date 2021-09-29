@@ -6,11 +6,12 @@
     <%= csp_meta_tag %>
     <script type="text/javascript">
       window.logoURL = "<%= image_url('soundcloud-logo.png') %>";
+      window.cameraImgURL = "<%= image_url('camera-upload.png') %>";
     </script>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
-
+  
   <body>
     <%= yield %>
   </body>

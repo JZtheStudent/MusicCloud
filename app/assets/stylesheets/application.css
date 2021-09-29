@@ -14,13 +14,12 @@
  *= require_self
  */
 
-header {
-  background-color: orange;
-  color: white;
-}
+
 
 body {
   background-color: rgb(233, 233, 233);
+  font: 12px/1.4 Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
+  color: #333;
 }
 
 .main-page-container {
