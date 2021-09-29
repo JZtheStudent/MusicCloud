@@ -1,0 +1,10 @@
+
+.profile-header {
+  display: block;
+  position: relative;
+  padding: 30px;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 260px;
+  background-color: blue;
+}

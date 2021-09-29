@@ -11,6 +11,7 @@ import PlaylistsContainer from './library/playlists_container';
 import AlbumsContainer from './library/albums_container';
 import FollowingContainer from './library/following_container';
 import HistoryContainer from './library/history_container';
+import ProfileContainer from './profile/profile_container';
 
 const App = () => {
   return (  
@@ -31,6 +32,7 @@ const App = () => {
             <ProtectedRoute exact path="/albums" component={AlbumsContainer} />
             <ProtectedRoute exact path="/following" component={FollowingContainer} />
             <ProtectedRoute exact path="/history" component={HistoryContainer} />
+            <ProtectedRoute exact path="/profile" component={ProfileContainer} />
             <Redirect to="/discover" />
           </Switch>
         </div>

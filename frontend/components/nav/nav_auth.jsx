@@ -12,9 +12,9 @@ const NavAuth = ({currentUser, logout, openModal}) => {
   
   const personalGreeting = () => (
     <nav className="right-nav">
-      <h2 className="greeting">Hi, 
-        <Link to="profile">{currentUser.username}</Link>
-      !</h2>
+      <Link to="profile">
+        <h2 className="greeting">Hi {currentUser.username}</h2>
+      </Link>
       <button className="auth-button" onClick={logout}>Log Out</button>
     </nav>
   )
