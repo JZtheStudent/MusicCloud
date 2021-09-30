@@ -106,7 +106,8 @@ var signup = function signup(user) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fetchUser": () => (/* binding */ fetchUser)
+/* harmony export */   "fetchUser": () => (/* binding */ fetchUser),
+/* harmony export */   "updateProfilePicture": () => (/* binding */ updateProfilePicture)
 /* harmony export */ });
 /* harmony import */ var _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_api_util */ "./frontend/util/user_api_util.js");
 /* harmony import */ var _session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_actions */ "./frontend/actions/session_actions.js");
@@ -115,6 +116,13 @@ __webpack_require__.r(__webpack_exports__);
 var fetchUser = function fetchUser(userId) {
   return function (dispatch) {
     return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchUser(userId).then(function (user) {
+      return dispatch((0,_session_actions__WEBPACK_IMPORTED_MODULE_1__.receiveCurrentUser)(user));
+    });
+  };
+};
+var updateProfilePicture = function updateProfilePicture(formData, userId) {
+  return function (dispatch) {
+    return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__.updateProfilePicture(formData, userId).then(function (user) {
       return dispatch((0,_session_actions__WEBPACK_IMPORTED_MODULE_1__.receiveCurrentUser)(user));
     });
   };
@@ -1389,7 +1397,9 @@ var Profile = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_header_profile_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_nav__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_header_profile_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        currentUser: this.props.currentUser
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_nav__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -1700,7 +1710,9 @@ var ProfileHeader = /*#__PURE__*/function (_React$Component) {
         className: "profile-background-no-image"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "profile-header-info-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_image_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_description_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_image_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        currentUser: this.props.currentUser
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_description_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "upload-background-image-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "upload-camera-img",
@@ -1778,6 +1790,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var ProfileImage = /*#__PURE__*/function (_React$Component) {
@@ -1791,21 +1805,48 @@ var ProfileImage = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ProfileImage);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "displayImage", function () {
+      return _this.props.profileImageUrl === "" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        className: "profile-image",
+        src: _this.props.profileImageUrl
+      });
+    });
+
     _this.state = {};
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ProfileImage, [{
+    key: "handleFile",
+    value: function handleFile(e) {
+      var currentUser = this.props.currentUser;
+      var imageFile = e.currentTarget.files[0];
+      var formData = new FormData();
+      formData.append('user[profile_photo]', imageFile); // formData.append('user[username]', currentUser.username);
+      // formData.append('user[email]', currentUser.email);
+
+      this.props.updateProfilePicture(formData, currentUser.id);
+    }
+  }, {
     key: "render",
     value: function render() {
+      // console.log(this.state);
+      console.log(this.props.profileImageUrl);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "profile-image-container"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, this.displayImage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "upload-image-button"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "upload-image-label"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        onChange: this.handleFile,
+        type: "file"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "upload-camera-img",
         src: window.cameraImgURL
-      }), "\xA0Upload image"));
+      }), "\xA0Upload image")));
     }
   }]);
 
@@ -1829,15 +1870,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _profile_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile_image */ "./frontend/components/profile/profile_header/profile_image.jsx");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/users_actions */ "./frontend/actions/users_actions.js");
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {};
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var session = _ref.session,
+      entities = _ref.entities;
+  return {
+    profileImageUrl: entities.user[session.id].profilePhoto,
+    currentUser: entities.user[session.id]
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    updateProfilePicture: function updateProfilePicture(formData, userId) {
+      return dispatch((0,_actions_users_actions__WEBPACK_IMPORTED_MODULE_2__.updateProfilePicture)(formData, userId));
+    }
+  };
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_profile_image__WEBPACK_IMPORTED_MODULE_1__["default"]));
@@ -2873,12 +2925,22 @@ var logout = function logout() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fetchUser": () => (/* binding */ fetchUser)
+/* harmony export */   "fetchUser": () => (/* binding */ fetchUser),
+/* harmony export */   "updateProfilePicture": () => (/* binding */ updateProfilePicture)
 /* harmony export */ });
 var fetchUser = function fetchUser(userId) {
   return $.ajax({
     url: "api/users/".concat(userId),
     method: 'GET'
+  });
+};
+var updateProfilePicture = function updateProfilePicture(formData, userId) {
+  return $.ajax({
+    url: "api/users/".concat(userId),
+    method: 'PATCH',
+    data: formData,
+    contentType: false,
+    processData: false
   });
 };
 

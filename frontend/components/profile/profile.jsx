@@ -15,7 +15,7 @@ class Profile extends React.Component {
   render() { 
     return (  
       <div>
-        <ProfileHeaderContainer />
+        <ProfileHeaderContainer currentUser={this.props.currentUser} />
         <ProfileNav />
       
       </div>

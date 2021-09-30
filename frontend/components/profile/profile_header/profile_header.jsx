@@ -12,7 +12,7 @@ class ProfileHeader extends React.Component {
       <div className="profile-header">
         <div className="profile-background-no-image">
           <div className="profile-header-info-container">
-            <ProfileImageContainer />
+            <ProfileImageContainer currentUser={this.props.currentUser}/>
             <ProfileDescriptionContainer />
             
             <button className="upload-background-image-button">
