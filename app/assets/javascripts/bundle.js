@@ -43,6 +43,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_CURRENT_USER": () => (/* binding */ RECEIVE_CURRENT_USER),
 /* harmony export */   "LOGOUT_CURRENT_USER": () => (/* binding */ LOGOUT_CURRENT_USER),
 /* harmony export */   "RECEIVE_SESSION_ERRORS": () => (/* binding */ RECEIVE_SESSION_ERRORS),
+/* harmony export */   "receiveCurrentUser": () => (/* binding */ receiveCurrentUser),
 /* harmony export */   "receiveErrors": () => (/* binding */ receiveErrors),
 /* harmony export */   "login": () => (/* binding */ login),
 /* harmony export */   "logout": () => (/* binding */ logout),
@@ -53,7 +54,6 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 var RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
-
 var receiveCurrentUser = function receiveCurrentUser(currentUser) {
   return {
     type: RECEIVE_CURRENT_USER,
@@ -91,6 +91,31 @@ var signup = function signup(user) {
   return function (dispatch) {
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.signup(user).then(function (newUser) {
       return dispatch(receiveCurrentUser(newUser));
+    });
+  };
+};
+
+/***/ }),
+
+/***/ "./frontend/actions/users_actions.js":
+/*!*******************************************!*\
+  !*** ./frontend/actions/users_actions.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchUser": () => (/* binding */ fetchUser)
+/* harmony export */ });
+/* harmony import */ var _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_api_util */ "./frontend/util/user_api_util.js");
+/* harmony import */ var _session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_actions */ "./frontend/actions/session_actions.js");
+
+
+var fetchUser = function fetchUser(userId) {
+  return function (dispatch) {
+    return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchUser(userId).then(function (user) {
+      return dispatch((0,_session_actions__WEBPACK_IMPORTED_MODULE_1__.receiveCurrentUser)(user));
     });
   };
 };
@@ -1357,6 +1382,11 @@ var Profile = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Profile, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchUser(this.props.currentUser.id);
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_header_profile_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_nav__WEBPACK_IMPORTED_MODULE_2__["default"], null));
@@ -1480,15 +1510,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _profile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile */ "./frontend/components/profile/profile.jsx");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {};
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var session = _ref.session,
+      entities = _ref.entities;
+  return {
+    currentUser: entities.user[session.id]
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    fetchUser: function fetchUser(userId) {
+      return dispatch((0,_actions_users_actions__WEBPACK_IMPORTED_MODULE_2__.fetchUser)(userId));
+    }
+  };
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_profile__WEBPACK_IMPORTED_MODULE_1__["default"]));
@@ -2819,6 +2859,26 @@ var logout = function logout() {
   return $.ajax({
     url: '/api/session',
     method: 'DELETE'
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/user_api_util.js":
+/*!****************************************!*\
+  !*** ./frontend/util/user_api_util.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchUser": () => (/* binding */ fetchUser)
+/* harmony export */ });
+var fetchUser = function fetchUser(userId) {
+  return $.ajax({
+    url: "api/users/".concat(userId),
+    method: 'GET'
   });
 };
 
