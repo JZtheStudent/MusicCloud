@@ -13,10 +13,6 @@ class ProfileImage extends React.Component {
     const imageFile = e.currentTarget.files[0];
     const formData = new FormData();
     formData.append('user[profile_photo]', imageFile);
-    // formData.append('user[username]', currentUser.username);
-    // formData.append('user[email]', currentUser.email);
-
-  
     this.props.updateProfilePicture(formData, currentUser.id);
   }
   
@@ -27,8 +23,6 @@ class ProfileImage extends React.Component {
   );
 
   render() { 
-    // console.log(this.state);
-    console.log(this.props.profileImageUrl)
     return (  
       <div>
         <div className="profile-image-container">

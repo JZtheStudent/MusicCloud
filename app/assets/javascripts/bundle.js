@@ -1824,16 +1824,12 @@ var ProfileImage = /*#__PURE__*/function (_React$Component) {
       var currentUser = this.props.currentUser;
       var imageFile = e.currentTarget.files[0];
       var formData = new FormData();
-      formData.append('user[profile_photo]', imageFile); // formData.append('user[username]', currentUser.username);
-      // formData.append('user[email]', currentUser.email);
-
+      formData.append('user[profile_photo]', imageFile);
       this.props.updateProfilePicture(formData, currentUser.id);
     }
   }, {
     key: "render",
     value: function render() {
-      // console.log(this.state);
-      console.log(this.props.profileImageUrl);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "profile-image-container"
       }, this.displayImage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
