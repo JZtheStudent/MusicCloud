@@ -1,4 +1,5 @@
 import React from 'react';
+import UploadForm from './upload_form';
 
 class Upload extends React.Component {
   constructor(props) {
@@ -7,8 +8,10 @@ class Upload extends React.Component {
   }
   render() { 
     return (  
-      <div>
-        <h1>Upload</h1>
+      <div className="upload-outer-container">
+        <div className="upload-inner-container">
+          <UploadForm />
+        </div>
       </div>
     );
   }

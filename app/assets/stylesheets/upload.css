@@ -1,0 +1,57 @@
+
+.upload-outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-inner-container {
+  border: 3px solid black;
+  height: 500px;
+  width: 700px;
+  margin-top: 200px;
+  margin-bottom: 400px;
+}
+
+.upload-track-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.upload-track-form-left {
+  height: 100%;
+  width: 50%;
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-track-form-right {
+  height: 100%;
+  width: 50%;
+  border: 2px solid blue;
+}
+
+.upload-track-image-container {
+  height: 260px;
+  width: 260px;
+  background-image: linear-gradient(135deg,#70929c,#e6846e);
+
+}
+
+.upload-track-image-button {
+  position: relative;
+  left: 70px;
+  top: -40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+.upload-track-image {
+  width: 100%;
+  height: 100%;
+}
