@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ProfileNav = () => {
   return (  
-    <div className="library-nav">
+    <div className="profile-nav">
       <Link to="/profile">
         <h2>All</h2>
       </Link>

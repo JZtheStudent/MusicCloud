@@ -21,7 +21,7 @@ class ProfileImage extends React.Component {
       <div></div> :
       <img className="profile-image" src={this.props.profileImageUrl}/>
   );
-
+  
   render() { 
     return (  
       <div>
