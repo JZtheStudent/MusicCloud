@@ -2667,7 +2667,10 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
         className: "upload-track-image",
         src: window.cameraImgURL
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "upload-track-image-button"
+        className: "upload-track-image-button",
+        onClick: function onClick() {
+          return e.preventDefault();
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "upload-image-label"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {

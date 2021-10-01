@@ -13,7 +13,7 @@ class UploadForm extends React.Component {
           <div className="upload-track-form-left">
             <div className="upload-track-image-container">
               <img className="upload-track-image" src={window.cameraImgURL} />
-              <button className="upload-track-image-button">
+              <button className="upload-track-image-button" onClick={() => e.preventDefault()}>
                 <label className="upload-image-label">
                   <input
                     onChange={this.handleFile} 
