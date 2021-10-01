@@ -2637,6 +2637,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var UploadForm = /*#__PURE__*/function (_React$Component) {
@@ -2650,11 +2652,31 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, UploadForm);
 
     _this = _super.call(this, props);
-    _this.state = {};
+
+    _defineProperty(_assertThisInitialized(_this), "displayImage", function () {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
+    });
+
+    _this.state = {
+      title: ""
+    };
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(UploadForm, [{
+    key: "handleFile",
+    value: function handleFile(e) {}
+  }, {
+    key: "change",
+    value: function change(item) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, item, e.currentTarget.value));
+      };
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -2663,10 +2685,7 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
         className: "upload-track-form-left"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "upload-track-image-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        className: "upload-track-image",
-        src: window.cameraImgURL
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, this.displayImage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "upload-track-image-button",
         onClick: function onClick() {
           return e.preventDefault();
@@ -2675,13 +2694,33 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
         className: "upload-image-label"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         onChange: this.handleFile,
-        type: "file"
+        type: "file",
+        accept: ".jpeg, .jpg, .png"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "upload-camera-img",
         src: window.cameraImgURL
-      }), "\xA0Upload image")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), "\xA0Upload image"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "upload-track-form-right"
-      }));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "upload-title-label"
+      }, "Title:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.title,
+        onChange: this.change('title'),
+        className: "upload-title-input"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "upload-music-button"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "upload-music-label"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "file",
+        accept: ".mp3"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        className: "upload-note-img",
+        src: window.cameraImgURL
+      }), "\xA0Upload Mp3")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit"
+      }, "UPLOAD")));
     }
   }]);
 
