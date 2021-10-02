@@ -2,13 +2,14 @@
 #
 # Table name: users
 #
-#  id              :bigint           not null, primary key
-#  username        :string           not null
-#  email           :string           not null
-#  password_digest :string           not null
-#  session_token   :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                :bigint           not null, primary key
+#  username          :string           not null
+#  email             :string           not null
+#  password_digest   :string           not null
+#  session_token     :string           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  profile_photo_url :string
 #
 class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true 
@@ -17,7 +18,11 @@ class User < ApplicationRecord
   
   has_one_attached :profile_photo
   
-
+  has_many :tracks, 
+    foreign_key: :artist_id,
+    class_name: :Track
+  
+  
   attr_reader :password
   
   after_initialize :ensure_session_token

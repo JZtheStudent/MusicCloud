@@ -2654,19 +2654,47 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "displayImage", function () {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
+      return _this.state.imagePreview === null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        className: "upload-track-image",
+        src: _this.state.imagePreview
+      });
     });
 
     _this.state = {
-      title: ""
+      title: "",
+      albumArt: null,
+      musicFile: null,
+      imagePreview: null
     };
-    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
+    _this.handleAlbumArtFile = _this.handleAlbumArtFile.bind(_assertThisInitialized(_this));
+    _this.handleMusicFile = _this.handleMusicFile.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(UploadForm, [{
-    key: "handleFile",
-    value: function handleFile(e) {}
+    key: "handleAlbumArtFile",
+    value: function handleAlbumArtFile(e) {
+      e.preventDefault();
+      var imageFile = e.currentTarget.files[0];
+      this.setState({
+        albumArt: imageFile,
+        imagePreview: URL.createObjectURL(imageFile)
+      });
+    }
+  }, {
+    key: "handleMusicFile",
+    value: function handleMusicFile(e) {
+      e.preventDefault();
+      this.setState({
+        musicFile: e.currentTarget.files[0]
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+    }
   }, {
     key: "change",
     value: function change(item) {
@@ -2679,21 +2707,20 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      console.log(this.state);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        className: "upload-track-form"
+        className: "upload-track-form",
+        onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "upload-track-form-left"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "upload-track-image-container"
       }, this.displayImage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "upload-track-image-button",
-        onClick: function onClick() {
-          return e.preventDefault();
-        }
+        className: "upload-track-image-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "upload-image-label"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        onChange: this.handleFile,
+        onChange: this.handleAlbumArtFile,
         type: "file",
         accept: ".jpeg, .jpg, .png"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
@@ -2708,17 +2735,20 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
         value: this.state.title,
         onChange: this.change('title'),
         className: "upload-title-input"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "upload-music-button-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "upload-music-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "upload-music-label"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        onChange: this.handleMusicFile,
         type: "file",
         accept: ".mp3"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "upload-note-img",
         src: window.cameraImgURL
-      }), "\xA0Upload Mp3")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }), "\xA0Upload Mp3")), this.state.musicFile ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Music File Uploaded!")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit"
       }, "UPLOAD")));
     }

@@ -5,13 +5,31 @@ class UploadForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {  
-      title: ""
+      title: "",
+      albumArt: null,
+      musicFile: null,
+      imagePreview: null
     }
-    this.handleFile = this.handleFile.bind(this);
+    this.handleAlbumArtFile = this.handleAlbumArtFile.bind(this);
+    this.handleMusicFile = this.handleMusicFile.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleFile(e) {
-
+  handleAlbumArtFile(e) {
+    e.preventDefault();
+    const imageFile = e.currentTarget.files[0];
+    this.setState({
+      albumArt: imageFile,
+      imagePreview: URL.createObjectURL(imageFile)})
+  }
+  
+  handleMusicFile(e) {
+    e.preventDefault();
+    this.setState({musicFile: e.currentTarget.files[0]})
+  }
+  
+  handleSubmit(e) {
+    e.preventDefault();
   }
 
   change(item) {
@@ -19,24 +37,26 @@ class UploadForm extends React.Component {
   }
   
   displayImage = () => (
-    <div></div>
+    (this.state.imagePreview === null) ?
+      <div></div> :
+      <img className="upload-track-image" src={this.state.imagePreview}/>
   )
   
 
   render() { 
+    console.log(this.state)
     return (  
-      
-      <form className="upload-track-form">
+      <form className="upload-track-form" onSubmit={this.handleSubmit}>
           <div className="upload-track-form-left">
             <div className="upload-track-image-container">
               {
                 this.displayImage()
               }       
             </div>
-            <button className="upload-track-image-button" onClick={() => e.preventDefault()}>
+            <button className="upload-track-image-button" >
                 <label className="upload-image-label">
                   <input
-                    onChange={this.handleFile} 
+                    onChange={this.handleAlbumArtFile} 
                     type="file"
                     accept=".jpeg, .jpg, .png"/>
                   <img className="upload-camera-img" src={window.cameraImgURL}/>&nbsp;Upload image
@@ -51,14 +71,23 @@ class UploadForm extends React.Component {
                 onChange={this.change('title')}
                 className="upload-title-input"/>
             </label>
-            <button className="upload-music-button">
-              <label className="upload-music-label">
-                <input 
-                  type="file"
-                  accept=".mp3"/> 
-                <img className="upload-note-img" src={window.cameraImgURL} />&nbsp;Upload Mp3
-              </label>
-            </button>
+            <div className="upload-music-button-group">
+              <button className="upload-music-button">
+                <label className="upload-music-label">
+                  <input 
+                    onChange={this.handleMusicFile}
+                    type="file"
+                    accept=".mp3"/> 
+                  <img className="upload-note-img" src={window.cameraImgURL} />&nbsp;Upload Mp3
+                </label>
+              </button>
+              {
+                (this.state.musicFile) ?
+                <div><br/><h3>Music File Uploaded!</h3></div> :
+                <div></div>
+              }
+            </div>
+
             <button type="submit">
               UPLOAD
             </button>

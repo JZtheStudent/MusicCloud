@@ -69,12 +69,16 @@
   
 }
 
+.upload-music-button-group {
+  margin-bottom: 40px;
+}
+
 .upload-music-button {
   display: flex;
   justify-content: center;
   align-items: center;
   color: #333;
-  margin-bottom: 40px;
+
 }
 
 .upload-music-label {
