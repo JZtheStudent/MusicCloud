@@ -97,6 +97,38 @@ var signup = function signup(user) {
 
 /***/ }),
 
+/***/ "./frontend/actions/track_actions.js":
+/*!*******************************************!*\
+  !*** ./frontend/actions/track_actions.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_TRACK": () => (/* binding */ RECEIVE_TRACK),
+/* harmony export */   "receiveTrack": () => (/* binding */ receiveTrack),
+/* harmony export */   "createTrack": () => (/* binding */ createTrack)
+/* harmony export */ });
+/* harmony import */ var _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/track_api_util */ "./frontend/util/track_api_util.js");
+
+var RECEIVE_TRACK = 'RECEIVE_TRACK';
+var receiveTrack = function receiveTrack(track) {
+  return {
+    type: RECEIVE_TRACK,
+    track: track
+  };
+};
+var createTrack = function createTrack(track, userId) {
+  return function (dispatch) {
+    return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.createTrack(track, userId).then(function (track) {
+      return dispatch(receiveTrack(track));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/users_actions.js":
 /*!*******************************************!*\
   !*** ./frontend/actions/users_actions.js ***!
@@ -2564,7 +2596,10 @@ var Upload = /*#__PURE__*/function (_React$Component) {
         className: "upload-outer-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "upload-inner-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_upload_form__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_upload_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        createTrack: this.props.createTrack,
+        currentUserId: this.props.currentUserId
+      })));
     }
   }]);
 
@@ -2588,15 +2623,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _upload__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./upload */ "./frontend/components/upload/upload.jsx");
+/* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {};
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var session = _ref.session;
+  return {
+    currentUserId: session.id
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    createTrack: function createTrack(track, userId) {
+      return dispatch((0,_actions_track_actions__WEBPACK_IMPORTED_MODULE_2__.createTrack)(track, userId));
+    }
+  };
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_upload__WEBPACK_IMPORTED_MODULE_1__["default"]));
@@ -2694,6 +2738,12 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
+      var formData = new FormData();
+      formData.append('track[title]', this.state.title);
+      formData.append('track[album_art]', this.state.albumArt);
+      formData.append('track[music_file', this.state.musicFile);
+      formData.append('track[artist_id]', this.props.currentUserId);
+      this.props.createTrack(formData, this.props.currentUserId);
     }
   }, {
     key: "change",
@@ -2707,7 +2757,7 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.state);
+      // console.log(this.state)
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "upload-track-form",
         onSubmit: this.handleSubmit
@@ -2748,9 +2798,10 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "upload-note-img",
         src: window.cameraImgURL
-      }), "\xA0Upload Mp3")), this.state.musicFile ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Music File Uploaded!")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "submit"
-      }, "UPLOAD")));
+      }), "\xA0Upload Mp3")), this.state.musicFile ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Music File Uploaded!")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "submit",
+        value: "UPLOAD"
+      })));
     }
   }]);
 
@@ -3174,6 +3225,32 @@ var logout = function logout() {
   return $.ajax({
     url: '/api/session',
     method: 'DELETE'
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/track_api_util.js":
+/*!*****************************************!*\
+  !*** ./frontend/util/track_api_util.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createTrack": () => (/* binding */ createTrack)
+/* harmony export */ });
+var createTrack = function createTrack(track, userId) {
+  console.log(track, userId);
+  return $.ajax({
+    url: "/api/users/".concat(userId, "/tracks"),
+    method: 'POST',
+    data: {
+      track: track
+    },
+    contentType: false,
+    processData: false
   });
 };
 

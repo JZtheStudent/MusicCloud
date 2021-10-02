@@ -7,7 +7,7 @@ export const receiveTrack = track => ({
   track
 });
 
-export const createTrack = track => dispatch => (
-  TrackApiUtil.createTrack(track)
+export const createTrack = (track, userId) => dispatch => (
+  TrackApiUtil.createTrack(track, userId)
     .then(track => dispatch(receiveTrack(track)))
 )

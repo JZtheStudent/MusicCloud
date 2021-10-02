@@ -30,6 +30,12 @@ class UploadForm extends React.Component {
   
   handleSubmit(e) {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('track[title]', this.state.title);
+    formData.append('track[album_art]', this.state.albumArt);
+    formData.append('track[music_file', this.state.musicFile);
+    formData.append('track[artist_id]',this.props.currentUserId);
+    this.props.createTrack(formData, this.props.currentUserId);
   }
 
   change(item) {
@@ -44,7 +50,7 @@ class UploadForm extends React.Component {
   
 
   render() { 
-    console.log(this.state)
+    // console.log(this.state)
     return (  
       <form className="upload-track-form" onSubmit={this.handleSubmit}>
           <div className="upload-track-form-left">
@@ -87,11 +93,11 @@ class UploadForm extends React.Component {
                 <div></div>
               }
             </div>
-
-            <button type="submit">
-              UPLOAD
-            </button>
-
+            
+            <input type="submit" value="UPLOAD" />
+    
+      
+          
           </div>
       </form>
    

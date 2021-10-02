@@ -10,7 +10,9 @@ class Upload extends React.Component {
     return (  
       <div className="upload-outer-container">
         <div className="upload-inner-container">
-          <UploadForm />
+          <UploadForm 
+            createTrack={this.props.createTrack}
+            currentUserId={this.props.currentUserId}/>
         </div>
       </div>
     );
