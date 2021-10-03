@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {browserHistory} from 'react-router';
 
 class UploadForm extends React.Component {
   constructor(props) {
@@ -33,9 +33,11 @@ class UploadForm extends React.Component {
     const formData = new FormData();
     formData.append('track[title]', this.state.title);
     formData.append('track[album_art]', this.state.albumArt);
-    formData.append('track[music_file', this.state.musicFile);
+    formData.append('track[music_file]', this.state.musicFile);
     formData.append('track[artist_id]',this.props.currentUserId);
     this.props.createTrack(formData, this.props.currentUserId);
+    browserHistory.push('/profile/tracks')
+  
   }
 
   change(item) {
@@ -50,9 +52,8 @@ class UploadForm extends React.Component {
   
 
   render() { 
-    // console.log(this.state)
     return (  
-      <form className="upload-track-form" onSubmit={this.handleSubmit}>
+      <div className="upload-track-form">
           <div className="upload-track-form-left">
             <div className="upload-track-image-container">
               {
@@ -94,12 +95,12 @@ class UploadForm extends React.Component {
               }
             </div>
             
-            <input type="submit" value="UPLOAD" />
+            <button onClick={this.handleSubmit}>Upload</button>
     
       
           
           </div>
-      </form>
+      </div>
    
     );
   }
