@@ -1,5 +1,5 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
+import {withRouter} from 'react-router-dom';
 
 class UploadForm extends React.Component {
   constructor(props) {
@@ -36,8 +36,7 @@ class UploadForm extends React.Component {
     formData.append('track[music_file]', this.state.musicFile);
     formData.append('track[artist_id]',this.props.currentUserId);
     this.props.createTrack(formData, this.props.currentUserId);
-    
-    browserHistory.push('/profile/tracks')
+    this.props.history.push('/profile/tracks')
   }
 
   change(item) {
@@ -106,4 +105,4 @@ class UploadForm extends React.Component {
   }
 }
  
-export default UploadForm;
+export default withRouter(UploadForm);

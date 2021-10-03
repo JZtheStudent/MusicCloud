@@ -9,7 +9,7 @@ const Nav = () => {
       <div className="inner-nav-container">
         <div className="left-nav">
 
-          <Link className="logo-link" to="/" >
+          <Link className="logo-link" to="/discover" >
             <img className="logo-img" src={window.logoURL} />
           </Link>
           
