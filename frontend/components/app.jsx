@@ -17,6 +17,8 @@ import ProfileAlbumsContainer from './profile/profile_albums_container'
 import ProfilePlaylistsContainer from './profile/profile_playlists_container';
 import UploadContainer from './upload/upload_container';
 
+import AudioPlayerContainer from './audio_player/audio_player_container';
+
 const App = () => {
   return (  
     <div className="app">
@@ -45,7 +47,11 @@ const App = () => {
           </Switch>
         </div>
         
+        <AudioPlayerContainer />
+
       </div>
+
+    
 
     
     </div>
