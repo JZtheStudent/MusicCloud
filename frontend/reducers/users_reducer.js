@@ -1,5 +1,5 @@
 import {RECEIVE_CURRENT_USER} from '../actions/session_actions'
-import { RECEIVE_TRACK } from '../actions/track_actions';
+
 
 const usersReducer = (state={}, action) => {
   Object.freeze(state);

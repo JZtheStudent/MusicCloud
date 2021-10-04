@@ -4,6 +4,10 @@ import ProfileNav from './profile_nav';
 import {Link} from 'react-router-dom';
 
 class ProfileTracks extends React.Component {
+  componentDidMount() {
+    this.props.fetchUserTracks(this.props.currentUser.id);
+  }
+
   constructor(props) {
     super(props);
     this.state = {  }

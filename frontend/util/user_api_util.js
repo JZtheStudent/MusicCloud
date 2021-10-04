@@ -16,3 +16,10 @@ export const updateProfilePicture = (formData, userId) => (
     processData: false
   })
 )
+
+export const fetchUserTracks = userId => (
+  $.ajax({
+    url: `api/users/${userId}/tracks`,
+    method: 'GET'
+  })
+);

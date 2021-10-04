@@ -29,6 +29,16 @@ class Api::UsersController < ApplicationController
     
   end
 
+  def tracks 
+    @user = User.find_by(id: params[:id])
+    if @user 
+      render :show_tracks
+    else
+      render json: @user.errors.full_messages, status: 404
+    end
+  end
+
+
   private
   def user_params
     params.require(:user).permit(:username, :email, :password, :profile_photo)
