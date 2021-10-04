@@ -310,17 +310,47 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
+ // useEffect is for fetching
 
 var AudioPlayer = function AudioPlayer(props) {
+  var _audioPlayer$current, _audioPlayer$current2;
+
   //state
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       isPlaying = _useState2[0],
-      setIsPlaying = _useState2[1]; //references
+      setIsPlaying = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      duration = _useState4[0],
+      setDuration = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState6 = _slicedToArray(_useState5, 2),
+      currentTime = _useState6[0],
+      setCurrentTime = _useState6[1]; //references
 
 
   var audioPlayer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(); // reference our audio component
+
+  var progressBar = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(); // reference our progress bar
+
+  var animationRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(); // reference the animation
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var seconds = Math.floor(audioPlayer.current.duration);
+    setDuration(seconds);
+    progressBar.current.max = seconds;
+  }, [audioPlayer === null || audioPlayer === void 0 ? void 0 : (_audioPlayer$current = audioPlayer.current) === null || _audioPlayer$current === void 0 ? void 0 : _audioPlayer$current.loadedmetadata, audioPlayer === null || audioPlayer === void 0 ? void 0 : (_audioPlayer$current2 = audioPlayer.current) === null || _audioPlayer$current2 === void 0 ? void 0 : _audioPlayer$current2.readyState]);
+
+  var calculateTime = function calculateTime(secs) {
+    var minutes = Math.floor(secs / 60);
+    var returnedMinutes = minutes < 10 ? "0".concat(minutes) : "".concat(minutes);
+    var seconds = Math.floor(secs % 60);
+    var returnedSeconds = seconds < 10 ? "0".concat(seconds) : "".concat(seconds);
+    return "".concat(returnedMinutes, ":").concat(returnedSeconds);
+  };
 
   var togglePlayPause = function togglePlayPause() {
     var prevValue = isPlaying;
@@ -328,9 +358,27 @@ var AudioPlayer = function AudioPlayer(props) {
 
     if (!prevValue) {
       audioPlayer.current.play();
+      animationRef.current = requestAnimationFrame(whilePlaying);
     } else {
       audioPlayer.current.pause();
+      cancelAnimationFrame(animationRef.current);
     }
+  };
+
+  var whilePlaying = function whilePlaying() {
+    progressBar.current.value = audioPlayer.current.currentTime;
+    changePlayerCurrentTime();
+    animationRef.current = requestAnimationFrame(whilePlaying);
+  };
+
+  var changeRange = function changeRange() {
+    audioPlayer.current.currentTime = progressBar.current.value;
+    changePlayerCurrentTime();
+  };
+
+  var changePlayerCurrentTime = function changePlayerCurrentTime() {
+    progressBar.current.style.setProperty('--seek-before-width', "".concat(progressBar.current.value / duration * 100, "%"));
+    setCurrentTime(progressBar.current.value);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -349,12 +397,15 @@ var AudioPlayer = function AudioPlayer(props) {
     className: "forward-backward"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_1__.BiArrowToRight, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "current-time"
-  }, "0:00"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+  }, calculateTime(currentTime)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     className: "progress-bar",
-    type: "range"
+    type: "range",
+    defaultValue: "0",
+    ref: progressBar,
+    onChange: changeRange
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "duration"
-  }, "2:49"));
+  }, duration && !isNaN(duration) && calculateTime(duration)));
 };
 
 
