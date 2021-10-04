@@ -47,10 +47,11 @@ const App = () => {
           </Switch>
         </div>
         
-        <AudioPlayerContainer />
+        
 
       </div>
-
+    
+      <AudioPlayerContainer />
     
 
     

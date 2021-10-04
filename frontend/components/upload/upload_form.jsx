@@ -49,7 +49,7 @@ class UploadForm extends React.Component {
       <img className="upload-track-image" src={this.state.imagePreview}/>
   )
   
-
+  
   render() { 
     return (  
       <div className="upload-track-form">

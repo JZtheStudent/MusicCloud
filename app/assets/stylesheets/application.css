@@ -25,7 +25,9 @@ body {
 .main-page-container {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .main-page-inner-container {
