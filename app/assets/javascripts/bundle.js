@@ -366,6 +366,10 @@ var AudioPlayer = function AudioPlayer(props) {
   };
 
   var whilePlaying = function whilePlaying() {
+    if (audioPlayer.current.currentTime === audioPlayer.current.duration) {
+      handleSongEnded();
+    }
+
     progressBar.current.value = audioPlayer.current.currentTime;
     changePlayerCurrentTime();
     animationRef.current = requestAnimationFrame(whilePlaying);
@@ -379,6 +383,10 @@ var AudioPlayer = function AudioPlayer(props) {
   var changePlayerCurrentTime = function changePlayerCurrentTime() {
     progressBar.current.style.setProperty('--seek-before-width', "".concat(progressBar.current.value / duration * 100, "%"));
     setCurrentTime(progressBar.current.value);
+  };
+
+  var handleSongEnded = function handleSongEnded() {
+    togglePlayPause();
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -405,7 +413,7 @@ var AudioPlayer = function AudioPlayer(props) {
     onChange: changeRange
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "duration"
-  }, duration && !isNaN(duration) && calculateTime(duration)));
+  }, duration && !isNaN(duration) ? calculateTime(duration) : "00:00"));
 };
 
 

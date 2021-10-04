@@ -44,6 +44,9 @@ const AudioPlayer = (props) => {
   }
   
   const whilePlaying = () => {
+    if (audioPlayer.current.currentTime === audioPlayer.current.duration) {
+      handleSongEnded();
+    }
     progressBar.current.value = audioPlayer.current.currentTime;
     changePlayerCurrentTime();
     animationRef.current = requestAnimationFrame(whilePlaying);
@@ -57,6 +60,10 @@ const AudioPlayer = (props) => {
   const changePlayerCurrentTime = () => {
     progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / duration * 100}%`)
     setCurrentTime(progressBar.current.value);   
+  }
+  
+  const handleSongEnded = () => {
+    togglePlayPause();
   }
 
   return (  
@@ -84,7 +91,7 @@ const AudioPlayer = (props) => {
       </div>
     
       {/* duration */}
-      <div className="duration">{(duration && !isNaN(duration)) && calculateTime(duration)}</div>
+      <div className="duration">{(duration && !isNaN(duration)) ? calculateTime(duration) : "00:00"}</div>
 
     </div>
   );
