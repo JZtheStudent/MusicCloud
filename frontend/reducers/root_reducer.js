@@ -3,13 +3,14 @@ import entitiesReducer from "./entities_reducer";
 import sessionReducer from "./session_reducer";
 import errorsReducer from "./errors_reducer";
 import uiReducer from "./ui_reducer";
+import playerReducer from "./player_reducer";
 
 const rootReducer = combineReducers({
   entities: entitiesReducer,
   session: sessionReducer,
   ui: uiReducer,
-  errors: errorsReducer
-  
+  errors: errorsReducer,
+  player: playerReducer
 });
 
 export default rootReducer;

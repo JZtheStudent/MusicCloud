@@ -9,9 +9,11 @@ class Track extends React.Component {
   }
 
   playClicked() {
-    console.log(this.props.track.musicFile);
+    const trackUrl = this.props.track.musicFile;
+    console.log(trackUrl);
+    this.props.receiveCurrentTrack(trackUrl);
   }
-
+  
   render() { 
     const { title, artist, albumArt } = this.props.track;
     return (  
