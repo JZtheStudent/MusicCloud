@@ -1,8 +1,10 @@
 .track {
-  width: 300px;
+  width: 60%;
   height: 300px;
   margin-bottom: 20px;
   text-align: center;
+  display: flex;
+  
 }
 
 .play-track-button {
@@ -44,4 +46,22 @@
 
 .track-image-container:hover + .play-text {
   opacity: 100%;
+}
+
+.track-right-container {
+  text-align: left;
+  margin-left: 20px;
+}
+
+.track-title {
+  font-size: 30px;
+  font-weight: 600;
+  font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
+}
+
+.track-artist-name {
+  margin-left: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
 }

@@ -2825,9 +2825,12 @@ var Track = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props$track = this.props.track,
           title = _this$props$track.title,
+          artist = _this$props$track.artist,
           albumArt = _this$props$track.albumArt;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "track"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "track-left-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "track-image-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -2838,7 +2841,13 @@ var Track = /*#__PURE__*/function (_React$Component) {
         src: albumArt
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
         className: "play-text"
-      }, "Play"));
+      }, "Play")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "track-right-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+        className: "track-title"
+      }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+        className: "track-artist-name"
+      }, artist.username)));
     }
   }]);
 

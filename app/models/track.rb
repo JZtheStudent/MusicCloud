@@ -21,14 +21,14 @@ class Track < ApplicationRecord
       errors[:album_art] << "Must be attached"
     end
   end
-
+  
   def ensure_music_file
     unless self.music_file.attached?
       errors[:album_art] << "Must be attached"
     end
   end
 
-  belongs_to :user,
+  belongs_to :artist,
     foreign_key: :artist_id,
     class_name: :User 
 

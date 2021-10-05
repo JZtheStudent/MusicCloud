@@ -13,15 +13,22 @@ class Track extends React.Component {
   }
 
   render() { 
-    const { title, albumArt} = this.props.track;
+    const { title, artist, albumArt } = this.props.track;
     return (  
       <div className="track">
-        <div className="track-image-container">
-          <button className="play-track-button" onClick={this.playClicked}>
-            <img className="track-image" src={albumArt}/>
-          </button>
+        <div className="track-left-container">
+          <div className="track-image-container">
+            <button className="play-track-button" onClick={this.playClicked}>
+              <img className="track-image" src={albumArt}/>
+            </button>
+          </div>
+          <h2 className="play-text">Play</h2>
         </div>
-        <h2 className="play-text">Play</h2>
+        <div className="track-right-container">
+          <h1 className="track-title">{title}</h1>
+          <h2 className="track-artist-name" >{artist.username}</h2>
+        </div>
+      
       </div>
     );
   }
