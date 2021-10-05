@@ -32,7 +32,7 @@ class ProfileTracks extends React.Component {
           }
         </div>
         
-        <Link to="upload">Upload</Link>
+        <Link to="/upload">Upload</Link>
       </div>
     );
   }

@@ -16,6 +16,7 @@ import ProfileTracksContainer from './profile/profile_tracks_container'
 import ProfileAlbumsContainer from './profile/profile_albums_container'
 import ProfilePlaylistsContainer from './profile/profile_playlists_container';
 import UploadContainer from './upload/upload_container';
+import EditTrackContainer from './edit_track/edit_track_container';
 
 import AudioPlayerContainer from './audio_player/audio_player_container';
 
@@ -42,7 +43,8 @@ const App = () => {
             <ProtectedRoute exact path="/profile/tracks" component={ProfileTracksContainer} /> 
             <ProtectedRoute exact path="/profile/albums" component={ProfileAlbumsContainer} /> 
             <ProtectedRoute exact path="/profile/playlists" component={ProfilePlaylistsContainer} />
-            <ProtectedRoute exact paht="/upload" component={UploadContainer} />
+            <ProtectedRoute exact path="/upload" component={UploadContainer} />
+            <ProtectedRoute exact path="/edit_track" component={EditTrackContainer} />
             <Redirect to="/discover" />
           </Switch>
         </div>
@@ -53,7 +55,7 @@ const App = () => {
     
       <AudioPlayerContainer />
     
-
+    
     
     </div>
   );

@@ -71,9 +71,16 @@
 
 .track-right-bottom-container {
   display: flex;
-
 }
 
 .track-right-bottom-container > * {
   margin-right: 5px;
 }
+
+.track-edit-button {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
