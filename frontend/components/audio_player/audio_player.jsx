@@ -16,9 +16,9 @@ const AudioPlayer = (props) => {
   const audioPlayer = useRef(); // reference our audio component
   const progressBar = useRef(); // reference our progress bar
   const animationRef = useRef(); // reference the animation
-
+  
   useEffect(() => {
-    const seconds = Math.floor(audioPlayer.current.duration);
+    const seconds = getDuration();
     setDuration(seconds);
     progressBar.current.max = seconds;
   }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
@@ -30,8 +30,11 @@ const AudioPlayer = (props) => {
     const returnedSeconds = seconds < 10 ? `0${seconds}`: `${seconds}`;
     return `${returnedMinutes}:${returnedSeconds}`
   }
-
+  
   const togglePlayPause = () => {
+    const seconds = getDuration();
+    setDuration(seconds);
+    
     const prevValue = isPlaying;
     setIsPlaying(!prevValue);
     if (!prevValue) {
@@ -62,6 +65,10 @@ const AudioPlayer = (props) => {
     setCurrentTime(progressBar.current.value);   
   }
   
+  const getDuration = () => {
+    return Math.floor(audioPlayer.current.duration);
+  }
+
   const handleSongEnded = () => {
     togglePlayPause();
   }

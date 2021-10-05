@@ -379,7 +379,7 @@ var AudioPlayer = function AudioPlayer(props) {
   var animationRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(); // reference the animation
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var seconds = Math.floor(audioPlayer.current.duration);
+    var seconds = getDuration();
     setDuration(seconds);
     progressBar.current.max = seconds;
   }, [audioPlayer === null || audioPlayer === void 0 ? void 0 : (_audioPlayer$current = audioPlayer.current) === null || _audioPlayer$current === void 0 ? void 0 : _audioPlayer$current.loadedmetadata, audioPlayer === null || audioPlayer === void 0 ? void 0 : (_audioPlayer$current2 = audioPlayer.current) === null || _audioPlayer$current2 === void 0 ? void 0 : _audioPlayer$current2.readyState]);
@@ -393,6 +393,8 @@ var AudioPlayer = function AudioPlayer(props) {
   };
 
   var togglePlayPause = function togglePlayPause() {
+    var seconds = getDuration();
+    setDuration(seconds);
     var prevValue = isPlaying;
     setIsPlaying(!prevValue);
 
@@ -423,6 +425,10 @@ var AudioPlayer = function AudioPlayer(props) {
   var changePlayerCurrentTime = function changePlayerCurrentTime() {
     progressBar.current.style.setProperty('--seek-before-width', "".concat(progressBar.current.value / duration * 100, "%"));
     setCurrentTime(progressBar.current.value);
+  };
+
+  var getDuration = function getDuration() {
+    return Math.floor(audioPlayer.current.duration);
   };
 
   var handleSongEnded = function handleSongEnded() {
