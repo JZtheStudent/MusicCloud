@@ -68,7 +68,7 @@ const AudioPlayer = (props) => {
 
   return (  
     <div className="audio-player-container">
-      <audio ref={audioPlayer} src={window.trackUrl}></audio>
+      <audio ref={audioPlayer} src={props.currentTrackUrl}></audio>
       <button className="forward-backward"><BiArrowToLeft/></button>
       <button className="play-pause" onClick={togglePlayPause} >
         {isPlaying ? <ImPause2 /> : <ImPlay3 className="play"/>}

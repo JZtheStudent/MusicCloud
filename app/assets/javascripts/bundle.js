@@ -433,7 +433,7 @@ var AudioPlayer = function AudioPlayer(props) {
     className: "audio-player-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("audio", {
     ref: audioPlayer,
-    src: window.trackUrl
+    src: props.currentTrackUrl
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "forward-backward"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_1__.BiArrowToLeft, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -476,8 +476,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {};
+var mapStateToProps = function mapStateToProps(_ref) {
+  var player = _ref.player;
+  return {
+    currentTrackUrl: player.currentTrackUrl
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -3192,36 +3195,6 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./frontend/reducers/current_track_reducer.js":
-/*!****************************************************!*\
-  !*** ./frontend/reducers/current_track_reducer.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var _nulltrack = {
-  track_url: null
-};
-
-var currentTrackReducer = function currentTrackReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nulltrack;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (currentTrackReducer);
-
-/***/ }),
-
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -3317,13 +3290,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _current_track_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./current_track_reducer */ "./frontend/reducers/current_track_reducer.js");
+/* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/player_actions */ "./frontend/actions/player_actions.js");
 
 
-var playerReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  currentTrack: _current_track_reducer__WEBPACK_IMPORTED_MODULE_0__["default"]
-});
+var playerReducer = function playerReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_TRACK:
+      return Object.assign({}, {
+        currentTrackUrl: action.currentTrackUrl
+      });
+
+    default:
+      return state;
+  }
+};
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (playerReducer);
 
 /***/ }),
