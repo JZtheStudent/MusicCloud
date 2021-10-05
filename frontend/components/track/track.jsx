@@ -14,7 +14,7 @@ class Track extends React.Component {
     this.props.receiveCurrentTrack(this.props.track);
   }
   
-  editButtonClicked() {
+  editClicked() {
     
   }
 
