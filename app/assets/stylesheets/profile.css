@@ -121,3 +121,16 @@ input[type="file"] {
 .profile-nav > *:hover {
   border-bottom: 3px solid black;
 }
+
+.profile-section-title {
+  font-size: 35px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  margin-left: 30px;
+  font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
+}
+
+.user-tracks-container {
+  margin-left: 30px;
+}
+

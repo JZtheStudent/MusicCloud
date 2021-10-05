@@ -1,10 +1,11 @@
 import { connect } from "react-redux";
 import ProfileTracks from "./profile_tracks";
 import { fetchUserTracks } from "../../actions/users_actions";
-import entitiesReducer from "../../reducers/entities_reducer";
+
 
 const mapStateToProps = ({session, entities}) => ({
-  currentUser: entities.user[session.id]
+  currentUser: entities.user[session.id],
+  userTracks: Object.values(entities.userTracks)
 });
 
 const mapDispatchToProps = dispatch => ({
