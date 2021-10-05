@@ -3,7 +3,7 @@ import { AudioPlayer } from './audio_player';
 
 
 const mapStateToProps = ({player}) => ({
-  currentTrackUrl: player.currentTrackUrl
+  currentTrack: player.currentTrack
 });
 
 const mapDispatchToProps = dispatch => ({

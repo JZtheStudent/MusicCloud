@@ -6,7 +6,7 @@ const playerReducer = (state={}, action) => {
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_CURRENT_TRACK:
-      return Object.assign({}, {currentTrackUrl: action.currentTrackUrl});
+      return Object.assign({}, {currentTrack: action.currentTrack});
     default:
       return state;
   }

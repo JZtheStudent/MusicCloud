@@ -1,5 +1,6 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
+import {BiEditAlt} from 'react-icons/bi';
 
 class Track extends React.Component {
   constructor(props) {
@@ -9,9 +10,7 @@ class Track extends React.Component {
   }
 
   playClicked() {
-    const trackUrl = this.props.track.musicFile;
-    console.log(trackUrl);
-    this.props.receiveCurrentTrack(trackUrl);
+    this.props.receiveCurrentTrack(this.props.track);
   }
   
   render() { 
@@ -27,8 +26,13 @@ class Track extends React.Component {
           <h2 className="play-text">Play</h2>
         </div>
         <div className="track-right-container">
-          <h1 className="track-title">{title}</h1>
-          <h2 className="track-artist-name" >{artist.username}</h2>
+          <div className="track-right-top-container">
+            <h1 className="track-title">{title}</h1>
+            <h2 className="track-artist-name" >{artist.username}</h2>
+          </div>
+          <div className="track-right-bottom-container">
+            
+          </div>
         </div>
       
       </div>

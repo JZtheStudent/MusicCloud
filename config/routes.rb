@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :tracks, only: [:create]
     end
     resource :session, only: [:create, :destroy]
-
+    
     get "/users/:id/tracks", to: 'users#tracks'
   end
   

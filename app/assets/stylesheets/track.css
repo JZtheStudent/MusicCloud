@@ -51,6 +51,9 @@
 .track-right-container {
   text-align: left;
   margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .track-title {
@@ -64,4 +67,13 @@
   font-size: 15px;
   font-weight: 500;
   font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
+}
+
+.track-right-bottom-container {
+  display: flex;
+
+}
+
+.track-right-bottom-container > * {
+  margin-right: 5px;
 }

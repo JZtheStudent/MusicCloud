@@ -44,10 +44,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "receiveCurrentTrack": () => (/* binding */ receiveCurrentTrack)
 /* harmony export */ });
 var RECEIVE_CURRENT_TRACK = 'RECEIVE_CURRENT_TRACK';
-var receiveCurrentTrack = function receiveCurrentTrack(currentTrackUrl) {
+var receiveCurrentTrack = function receiveCurrentTrack(currentTrack) {
   return {
     type: RECEIVE_CURRENT_TRACK,
-    currentTrackUrl: currentTrackUrl
+    currentTrack: currentTrack
   };
 };
 
@@ -369,7 +369,12 @@ var AudioPlayer = function AudioPlayer(props) {
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
       currentTime = _useState6[0],
-      setCurrentTime = _useState6[1]; //references
+      setCurrentTime = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      trackTitle = _useState8[0],
+      setTrackTitle = _useState8[1]; //references
 
 
   var audioPlayer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(); // reference our audio component
@@ -378,7 +383,11 @@ var AudioPlayer = function AudioPlayer(props) {
 
   var animationRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(); // reference the animation
 
+  var songTitleRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
+    setIsPlaying(props.currentTrack ? audioPlayer.current.paused ? false : true : false);
+    animationRef.current = requestAnimationFrame(whilePlaying);
     var seconds = getDuration();
     setDuration(seconds);
     progressBar.current.max = seconds;
@@ -438,9 +447,12 @@ var AudioPlayer = function AudioPlayer(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "audio-player-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("audio", {
+    autoPlay: true,
     ref: audioPlayer,
-    src: props.currentTrackUrl
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    src: props.currentTrack ? props.currentTrack.musicFile : ""
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    ref: songTitleRef
+  }, trackTitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "forward-backward"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_1__.BiArrowToLeft, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "play-pause",
@@ -485,7 +497,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(_ref) {
   var player = _ref.player;
   return {
-    currentTrackUrl: player.currentTrackUrl
+    currentTrack: player.currentTrack
   };
 };
 
@@ -2830,6 +2842,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var Track = /*#__PURE__*/function (_React$Component) {
   _inherits(Track, _React$Component);
 
@@ -2849,9 +2863,7 @@ var Track = /*#__PURE__*/function (_React$Component) {
   _createClass(Track, [{
     key: "playClicked",
     value: function playClicked() {
-      var trackUrl = this.props.track.musicFile;
-      console.log(trackUrl);
-      this.props.receiveCurrentTrack(trackUrl);
+      this.props.receiveCurrentTrack(this.props.track);
     }
   }, {
     key: "render",
@@ -2876,11 +2888,15 @@ var Track = /*#__PURE__*/function (_React$Component) {
         className: "play-text"
       }, "Play")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "track-right-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "track-right-top-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         className: "track-title"
       }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
         className: "track-artist-name"
-      }, artist.username)));
+      }, artist.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "track-right-bottom-container"
+      })));
     }
   }]);
 
@@ -2915,8 +2931,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    receiveCurrentTrack: function receiveCurrentTrack(trackUrl) {
-      return dispatch((0,_actions_player_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentTrack)(trackUrl));
+    receiveCurrentTrack: function receiveCurrentTrack(track) {
+      return dispatch((0,_actions_player_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentTrack)(track));
     }
   };
 };
@@ -3307,7 +3323,7 @@ var playerReducer = function playerReducer() {
   switch (action.type) {
     case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_TRACK:
       return Object.assign({}, {
-        currentTrackUrl: action.currentTrackUrl
+        currentTrack: action.currentTrack
       });
 
     default:

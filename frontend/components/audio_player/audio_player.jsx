@@ -11,13 +11,19 @@ const AudioPlayer = (props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [trackTitle, setTrackTitle] = useState('');
 
   //references
   const audioPlayer = useRef(); // reference our audio component
   const progressBar = useRef(); // reference our progress bar
   const animationRef = useRef(); // reference the animation
+  const songTitleRef = useRef();
   
   useEffect(() => {
+    
+    setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
+    setIsPlaying(props.currentTrack ? (audioPlayer.current.paused ? false : true) : false);
+    animationRef.current = requestAnimationFrame(whilePlaying);
     const seconds = getDuration();
     setDuration(seconds);
     progressBar.current.max = seconds;
@@ -34,7 +40,7 @@ const AudioPlayer = (props) => {
   const togglePlayPause = () => {
     const seconds = getDuration();
     setDuration(seconds);
-    
+
     const prevValue = isPlaying;
     setIsPlaying(!prevValue);
     if (!prevValue) {
@@ -72,10 +78,13 @@ const AudioPlayer = (props) => {
   const handleSongEnded = () => {
     togglePlayPause();
   }
-
+  
+  
   return (  
     <div className="audio-player-container">
-      <audio ref={audioPlayer} src={props.currentTrackUrl}></audio>
+      <audio autoPlay ref={audioPlayer} src={props.currentTrack ? props.currentTrack.musicFile : ""}></audio>
+      
+      <h1 ref={songTitleRef}>{trackTitle}</h1>
       <button className="forward-backward"><BiArrowToLeft/></button>
       <button className="play-pause" onClick={togglePlayPause} >
         {isPlaying ? <ImPause2 /> : <ImPlay3 className="play"/>}

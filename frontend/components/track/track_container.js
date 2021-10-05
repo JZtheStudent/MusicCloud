@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  receiveCurrentTrack: (trackUrl) => dispatch(receiveCurrentTrack(trackUrl))
+  receiveCurrentTrack: (track) => dispatch(receiveCurrentTrack(track))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Track);
