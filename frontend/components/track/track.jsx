@@ -8,21 +8,12 @@ class Track extends React.Component {
     super(props);
     this.state = {  }
     this.playClicked = this.playClicked.bind(this);
-    this.deleteClicked = this.deleteClicked.bind(this);
   }
   
   playClicked() {
     this.props.receiveCurrentTrack(this.props.track);
   }
   
-  deleteClicked() {
-    // console.log(this.props.track);
-    const {artist, id } = this.props.track;
-    if (confirm('Are you sure you want to delete this track?')) {
-      this.props.deleteTrack(artist.id, id)
-        .then(props.history.push('/profile/tracks'));
-    } 
-  }
   
   render() { 
     const { title, artist, albumArt } = this.props.track;
@@ -48,9 +39,12 @@ class Track extends React.Component {
                 track: this.props.track
               }
             }}><BiEditAlt className="track-edit-link" /></Link>
-            <button className="track-delete-button" onClick={this.deleteClicked}>
-              <RiDeleteBin5Line/>
-            </button>
+            <Link to={{
+              pathname: '/delete_track',
+              state: {
+                track: this.props.track
+              }
+            }}><RiDeleteBin5Line className="track-delete-link" /></Link>
           </div>
         </div>
       

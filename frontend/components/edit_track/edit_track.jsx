@@ -9,7 +9,7 @@ const EditTrack = (props) => {
   const imagePreview = track.albumArt;
   const artistId = track.artist.id;
   const trackId = track.id;
-
+  
   const titleChanged = () => {
     return e => {setTitle(e.currentTarget.value)}
   }
