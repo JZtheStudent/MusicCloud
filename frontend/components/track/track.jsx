@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {BiEditAlt} from 'react-icons/bi';
 
 class Track extends React.Component {
@@ -7,17 +7,13 @@ class Track extends React.Component {
     super(props);
     this.state = {  }
     this.playClicked = this.playClicked.bind(this);
-    this.editClicked = this.editClicked.bind(this);
   }
-
+  
   playClicked() {
     this.props.receiveCurrentTrack(this.props.track);
   }
-  
-  editClicked() {
-    
-  }
 
+  
   render() { 
     const { title, artist, albumArt } = this.props.track;
     return (  
@@ -36,7 +32,12 @@ class Track extends React.Component {
             <h2 className="track-artist-name" >{artist.username}</h2>
           </div>
           <div className="track-right-bottom-container">
-            <button className="track-edit-button" onClick={this.editClicked}><BiEditAlt className="track-edit-link" /></button>
+            <Link to={{
+              pathname: '/edit_track',
+              state: {
+                track: this.props.track
+              }
+            }}><BiEditAlt className="track-edit-link" /></Link>
           </div>
         </div>
       

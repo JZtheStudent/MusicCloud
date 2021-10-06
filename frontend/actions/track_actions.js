@@ -1,13 +1,13 @@
 import * as TrackApiUtil from '../util/track_api_util';
+import { fetchUserTracks } from './users_actions';
 
-export const RECEIVE_TRACK = 'RECEIVE_TRACK';
-
-export const receiveTrack = track => ({
-  type: RECEIVE_TRACK,
-  track
-});
 
 export const createTrack = (track, userId) => dispatch => (
   TrackApiUtil.createTrack(track, userId)
-    .then(track => dispatch(receiveTrack(track)))
+    .then(() => dispatch(fetchUserTracks(userId)))
+);
+
+export const updateTrack = (data, userId, trackId) => dispatch => (
+  TrackApiUtil.updateTrack(data, userId, trackId)
+    .then(() => dispatch(fetchUserTracks(userId)))
 )

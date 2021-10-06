@@ -4,7 +4,7 @@ const userTracksReducer = (state={}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_USER_TRACKS:
-      return Object.assign({}, state, action.user_tracks)
+      return Object.assign({}, state, action.userTracks)
     default:
       return state;
   }

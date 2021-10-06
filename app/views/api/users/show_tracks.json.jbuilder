@@ -1,4 +1,5 @@
 json.array! @user.tracks do |track|
+  json.id track.id
   json.title track.title 
   json.artist track.artist
   json.albumArt url_for(track.album_art)

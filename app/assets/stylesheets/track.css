@@ -1,5 +1,5 @@
 .track {
-  width: 60%;
+  width: 85%;
   height: 300px;
   margin-bottom: 30px;
   text-align: center;
@@ -84,3 +84,6 @@
   cursor: pointer;
 }
 
+.track-edit-link {
+  font-size: 20px;
+}

@@ -3,9 +3,9 @@ import { receiveCurrentUser } from './session_actions';
 
 export const RECEIVE_USER_TRACKS = 'RECEIVE_USER_TRACKS'
 
-const receive_user_tracks = user_tracks => ({
+export const receiveUserTracks = userTracks => ({
   type: RECEIVE_USER_TRACKS,
-  user_tracks
+  userTracks
 });
 
 
@@ -21,5 +21,5 @@ export const updateProfilePicture = (formData, userId) => dispatch => (
 
 export const fetchUserTracks = userId => dispatch => (
   UserApiUtil.fetchUserTracks(userId)
-    .then(userTracks => dispatch(receive_user_tracks(userTracks)))
+    .then(userTracks => dispatch(receiveUserTracks(userTracks)))
 );

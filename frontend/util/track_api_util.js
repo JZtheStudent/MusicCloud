@@ -9,3 +9,13 @@ export const createTrack = (track, userId) => {
     processData: false
   }))
 };
+
+export const updateTrack = (data, userId, trackId) => (
+  $.ajax({
+    url: `api/users/${userId}/tracks/${trackId}`,
+    method: 'PATCH',
+    data: data,
+    contentType: false,
+    processData: false
+  })
+)
