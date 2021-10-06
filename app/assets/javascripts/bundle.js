@@ -283,7 +283,7 @@ var App = function App() {
     component: _edit_track_edit_track_container__WEBPACK_IMPORTED_MODULE_11__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Redirect, {
     to: "/discover"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_audio_player_audio_player_container__WEBPACK_IMPORTED_MODULE_12__["default"], null));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_audio_player_audio_player_container__WEBPACK_IMPORTED_MODULE_12__["default"], null))));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -1974,7 +1974,11 @@ var ProfileTracks = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_header_profile_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_nav__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "profile-page-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_header_profile_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        currentUser: this.props.currentUser
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_nav__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         className: "profile-section-title"
       }, "Your Tracks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "user-tracks-container"
@@ -1984,8 +1988,9 @@ var ProfileTracks = /*#__PURE__*/function (_React$Component) {
           key: idx
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+        className: "upload-link",
         to: "/upload"
-      }, "Upload"));
+      }, "Upload More"));
     }
   }]);
 

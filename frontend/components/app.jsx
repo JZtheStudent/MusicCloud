@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
-import {AuthRoute, ProtectedRoute} from '../util/route_utils';
+import {ProtectedRoute} from '../util/route_utils';
 import Nav from './nav/nav';
 import Modal from './modal/modal';
 import DiscoverContainer from './discover/discover_container';
@@ -35,13 +35,14 @@ const App = () => {
             <ProtectedRoute exact path="/edit_track" component={EditTrackContainer} />
             <Redirect to="/discover" />
           </Switch>
+          <AudioPlayerContainer />
         </div>
         
         
-
+        
       </div>
     
-      <AudioPlayerContainer />
+      
     
     
     

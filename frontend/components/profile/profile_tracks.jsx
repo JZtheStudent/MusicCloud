@@ -17,8 +17,8 @@ class ProfileTracks extends React.Component {
   render() { 
     
     return (  
-      <div>
-        <ProfileHeaderContainer />
+      <div className="profile-page-container">
+        <ProfileHeaderContainer currentUser={this.props.currentUser}/>
         <ProfileNav />
 
         <h1 className="profile-section-title">Your Tracks</h1>
@@ -32,7 +32,7 @@ class ProfileTracks extends React.Component {
           }
         </div>
         
-        <Link to="/upload">Upload</Link>
+        <Link className="upload-link" to="/upload">Upload More</Link>
       </div>
     );
   }
