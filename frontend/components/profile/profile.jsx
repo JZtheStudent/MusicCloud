@@ -7,7 +7,7 @@ class Profile extends React.Component {
     this.props.fetchUser(this.props.currentUser.id);
   }
   
-
+  
   constructor(props) {
     super(props);
     this.state = {  }

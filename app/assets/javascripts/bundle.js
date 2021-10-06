@@ -1985,6 +1985,7 @@ var ProfileTracks = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchUserTracks(this.props.currentUser.id);
+      this.props.fetchUser(this.props.currentUser.id);
     }
   }, {
     key: "render",
@@ -2005,7 +2006,7 @@ var ProfileTracks = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
         className: "upload-link",
         to: "/upload"
-      }, "Upload More"));
+      }, "Upload Track"));
     }
   }]);
 
@@ -2034,6 +2035,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var mapStateToProps = function mapStateToProps(_ref) {
   var session = _ref.session,
       entities = _ref.entities;
@@ -2045,6 +2047,9 @@ var mapStateToProps = function mapStateToProps(_ref) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    fetchUser: function fetchUser(userId) {
+      return dispatch((0,_actions_users_actions__WEBPACK_IMPORTED_MODULE_2__.fetchUser)(userId));
+    },
     fetchUserTracks: function fetchUserTracks(userId) {
       return dispatch((0,_actions_users_actions__WEBPACK_IMPORTED_MODULE_2__.fetchUserTracks)(userId));
     }

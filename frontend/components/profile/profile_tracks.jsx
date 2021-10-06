@@ -8,6 +8,7 @@ import TrackContainer from '../track/track_container';
 class ProfileTracks extends React.Component {
   componentDidMount() {
     this.props.fetchUserTracks(this.props.currentUser.id);
+    this.props.fetchUser(this.props.currentUser.id);
   }
   
   constructor(props) {
@@ -32,7 +33,7 @@ class ProfileTracks extends React.Component {
           }
         </div>
         
-        <Link className="upload-link" to="/upload">Upload More</Link>
+        <Link className="upload-link" to="/upload">Upload Track</Link>
       </div>
     );
   }
