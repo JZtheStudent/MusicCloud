@@ -1,13 +1,15 @@
 import { connect } from "react-redux";
 import Track from "./track";
 import { receiveCurrentTrack } from "../../actions/player_actions";
+import { deleteTrack } from "../../actions/track_actions";
 
 const mapStateToProps = state => ({
 
 });
 
 const mapDispatchToProps = dispatch => ({
-  receiveCurrentTrack: (track) => dispatch(receiveCurrentTrack(track))
+  receiveCurrentTrack: (track) => dispatch(receiveCurrentTrack(track)),
+  deleteTrack: (userId, trackId) => dispatch(deleteTrack(userId, trackId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Track);

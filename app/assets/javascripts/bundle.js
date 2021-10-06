@@ -129,7 +129,8 @@ var signup = function signup(user) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createTrack": () => (/* binding */ createTrack),
-/* harmony export */   "updateTrack": () => (/* binding */ updateTrack)
+/* harmony export */   "updateTrack": () => (/* binding */ updateTrack),
+/* harmony export */   "deleteTrack": () => (/* binding */ deleteTrack)
 /* harmony export */ });
 /* harmony import */ var _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/track_api_util */ "./frontend/util/track_api_util.js");
 /* harmony import */ var _users_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_actions */ "./frontend/actions/users_actions.js");
@@ -145,6 +146,13 @@ var createTrack = function createTrack(track, userId) {
 var updateTrack = function updateTrack(data, userId, trackId) {
   return function (dispatch) {
     return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.updateTrack(data, userId, trackId).then(function () {
+      return dispatch((0,_users_actions__WEBPACK_IMPORTED_MODULE_1__.fetchUserTracks)(userId));
+    });
+  };
+};
+var deleteTrack = function deleteTrack(userId, trackId) {
+  return function (dispatch) {
+    return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteTrack(userId, trackId).then(function () {
       return dispatch((0,_users_actions__WEBPACK_IMPORTED_MODULE_1__.fetchUserTracks)(userId));
     });
   };
@@ -214,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _util_route_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/route_utils */ "./frontend/util/route_utils.jsx");
 /* harmony import */ var _nav_nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nav/nav */ "./frontend/components/nav/nav.jsx");
 /* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
@@ -226,7 +234,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _profile_profile_playlists_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./profile/profile_playlists_container */ "./frontend/components/profile/profile_playlists_container.js");
 /* harmony import */ var _upload_upload_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./upload/upload_container */ "./frontend/components/upload/upload_container.js");
 /* harmony import */ var _edit_track_edit_track_container__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./edit_track/edit_track_container */ "./frontend/components/edit_track/edit_track_container.js");
-/* harmony import */ var _audio_player_audio_player_container__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./audio_player/audio_player_container */ "./frontend/components/audio_player/audio_player_container.js");
+/* harmony import */ var _track_delete_track_delete_container__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./track_delete/track_delete_container */ "./frontend/components/track_delete/track_delete_container.js");
+/* harmony import */ var _audio_player_audio_player_container__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./audio_player/audio_player_container */ "./frontend/components/audio_player/audio_player_container.js");
+
 
 
 
@@ -249,7 +259,7 @@ var App = function App() {
     className: "main-page-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "main-page-inner-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
     exact: true,
     path: "/discover",
     component: _discover_discover_container__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -281,9 +291,13 @@ var App = function App() {
     exact: true,
     path: "/edit_track",
     component: _edit_track_edit_track_container__WEBPACK_IMPORTED_MODULE_11__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Redirect, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+    exact: true,
+    path: "/delete_track",
+    component: _track_delete_track_delete_container__WEBPACK_IMPORTED_MODULE_12__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Redirect, {
     to: "/discover"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_audio_player_audio_player_container__WEBPACK_IMPORTED_MODULE_12__["default"], null))));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_audio_player_audio_player_container__WEBPACK_IMPORTED_MODULE_13__["default"], null))));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -2334,6 +2348,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var react_icons_bi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/bi */ "./node_modules/react-icons/bi/index.esm.js");
 /* harmony import */ var react_icons_ri__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/ri */ "./node_modules/react-icons/ri/index.esm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2376,6 +2391,7 @@ var Track = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {};
     _this.playClicked = _this.playClicked.bind(_assertThisInitialized(_this));
+    _this.deleteClicked = _this.deleteClicked.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2385,12 +2401,24 @@ var Track = /*#__PURE__*/function (_React$Component) {
       this.props.receiveCurrentTrack(this.props.track);
     }
   }, {
+    key: "deleteClicked",
+    value: function deleteClicked() {
+      // console.log(this.props.track);
+      var _this$props$track = this.props.track,
+          artist = _this$props$track.artist,
+          id = _this$props$track.id;
+
+      if (confirm('Are you sure you want to delete this track?')) {
+        this.props.deleteTrack(artist.id, id).then(props.history.push('/profile/tracks'));
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this$props$track = this.props.track,
-          title = _this$props$track.title,
-          artist = _this$props$track.artist,
-          albumArt = _this$props$track.albumArt;
+      var _this$props$track2 = this.props.track,
+          title = _this$props$track2.title,
+          artist = _this$props$track2.artist,
+          albumArt = _this$props$track2.albumArt;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "track"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2425,17 +2453,16 @@ var Track = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_2__.BiEditAlt, {
         className: "track-edit-link"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "track-delete-button"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_ri__WEBPACK_IMPORTED_MODULE_3__.RiDeleteBin5Line, {
-        className: "track-delete-icon"
-      })))));
+        className: "track-delete-button",
+        onClick: this.deleteClicked
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_ri__WEBPACK_IMPORTED_MODULE_3__.RiDeleteBin5Line, null)))));
     }
   }]);
 
   return Track;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Track);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.withRouter)(Track));
 
 /***/ }),
 
@@ -2453,6 +2480,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _track__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track */ "./frontend/components/track/track.jsx");
 /* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/player_actions */ "./frontend/actions/player_actions.js");
+/* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
+
 
 
 
@@ -2465,11 +2494,64 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     receiveCurrentTrack: function receiveCurrentTrack(track) {
       return dispatch((0,_actions_player_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentTrack)(track));
+    },
+    deleteTrack: function deleteTrack(userId, trackId) {
+      return dispatch((0,_actions_track_actions__WEBPACK_IMPORTED_MODULE_3__.deleteTrack)(userId, trackId));
     }
   };
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_track__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/track_delete/track_delete.jsx":
+/*!***********************************************************!*\
+  !*** ./frontend/components/track_delete/track_delete.jsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var TrackDelete = function TrackDelete() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TrackDelete);
+
+/***/ }),
+
+/***/ "./frontend/components/track_delete/track_delete_container.js":
+/*!********************************************************************!*\
+  !*** ./frontend/components/track_delete/track_delete_container.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _track_delete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track_delete */ "./frontend/components/track_delete/track_delete.jsx");
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {};
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_track_delete__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -3284,7 +3366,8 @@ var logout = function logout() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createTrack": () => (/* binding */ createTrack),
-/* harmony export */   "updateTrack": () => (/* binding */ updateTrack)
+/* harmony export */   "updateTrack": () => (/* binding */ updateTrack),
+/* harmony export */   "deleteTrack": () => (/* binding */ deleteTrack)
 /* harmony export */ });
 var createTrack = function createTrack(track, userId) {
   return $.ajax({
@@ -3302,6 +3385,12 @@ var updateTrack = function updateTrack(data, userId, trackId) {
     data: data,
     contentType: false,
     processData: false
+  });
+};
+var deleteTrack = function deleteTrack(userId, trackId) {
+  return $.ajax({
+    url: "api/users/".concat(userId, "/tracks/").concat(trackId),
+    method: 'DELETE'
   });
 };
 

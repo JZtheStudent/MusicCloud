@@ -19,3 +19,10 @@ export const updateTrack = (data, userId, trackId) => (
     processData: false
   })
 )
+
+export const deleteTrack = (userId, trackId) => (
+  $.ajax({
+    url: `api/users/${userId}/tracks/${trackId}`,
+    method: 'DELETE'
+  })
+)
