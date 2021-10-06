@@ -16,9 +16,8 @@ class Discover extends React.Component {
 
   render() { 
     return (  
-      <div>
-        <h1>DISCOVER PAGE</h1>
-        <button onClick={this.handleClick}>Stream</button>
+      <div className="discover-page-container">
+        <h1 className="discover-header">COMING SOON</h1>
       </div>
     );
   }

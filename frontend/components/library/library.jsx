@@ -8,10 +8,9 @@ class Library extends React.Component {
   }
   render() { 
     return ( 
-      <div>
-        <LibraryNavContainer />
-        <h1>LIBRARY</h1>
-      </div> 
+      <div className="discover-page-container">
+        <h1 className="discover-header">COMING SOON</h1>
+      </div>
       
     );
   }

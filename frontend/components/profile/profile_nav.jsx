@@ -10,9 +10,6 @@ const ProfileNav = () => {
       <Link to="/profile/tracks">
         <h2>Tracks</h2>
       </Link>
-      <Link to="/profile/albums">
-        <h2>Albums</h2>
-      </Link>
       <Link to="/profile/playlists">
         <h2>Playlists</h2>
       </Link>
