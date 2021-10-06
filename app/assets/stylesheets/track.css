@@ -75,6 +75,7 @@
 
 .track-right-bottom-container > * {
   margin-right: 5px;
+  color: black;
 }
 
 .track-edit-button {
@@ -86,4 +87,11 @@
 
 .track-edit-link {
   font-size: 20px;
+}
+
+.track-delete-button {
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }

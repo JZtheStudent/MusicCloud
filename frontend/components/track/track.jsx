@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {BiEditAlt} from 'react-icons/bi';
+import {RiDeleteBin5Line} from 'react-icons/ri';
 
 class Track extends React.Component {
   constructor(props) {
@@ -38,6 +39,9 @@ class Track extends React.Component {
                 track: this.props.track
               }
             }}><BiEditAlt className="track-edit-link" /></Link>
+            <button className="track-delete-button">
+              <RiDeleteBin5Line className="track-delete-icon" />
+            </button>
           </div>
         </div>
       
