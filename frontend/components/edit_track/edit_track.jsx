@@ -39,7 +39,9 @@ const EditTrack = (props) => {
                 onChange={titleChanged()}
                 className="upload-title-input"/>
             </label>
-            <button onClick={handleSubmit}>Edit</button>
+            <button 
+              className="confirm-button"
+              onClick={handleSubmit}>Confirm Edit</button>
           </div>
         </div>
       </div>

@@ -677,8 +677,9 @@ var EditTrack = function EditTrack(props) {
     onChange: titleChanged(),
     className: "upload-title-input"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "confirm-button",
     onClick: handleSubmit
-  }, "Edit")))));
+  }, "Confirm Edit")))));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.withRouter)(EditTrack));
@@ -2524,20 +2525,37 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var TrackDelete = function TrackDelete(props) {
   var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useLocation)();
   var track = location.state.track;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(track.title),
-      _useState2 = _slicedToArray(_useState, 2),
-      title = _useState2[0],
-      setTitle = _useState2[1];
-
+  var title = track.title;
   var imagePreview = track.albumArt;
   var artistId = track.artist.id;
   var trackId = track.id;
 
-  var titleChanged = function titleChanged() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      inputText = _useState2[0],
+      setInputText = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      matching = _useState4[0],
+      setMatching = _useState4[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    checkMatching();
+  }, [inputText]);
+
+  var inputChanged = function inputChanged() {
     return function (e) {
-      setTitle(e.currentTarget.value);
+      setInputText(e.currentTarget.value);
     };
+  };
+
+  var checkMatching = function checkMatching() {
+    if (inputText === title) {
+      setMatching(true);
+    } else {
+      setMatching(false);
+    }
   };
 
   var handleSubmit = function handleSubmit(e) {
@@ -2560,15 +2578,17 @@ var TrackDelete = function TrackDelete(props) {
     src: imagePreview
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "upload-track-form-right"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Type song title to confirm:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: "upload-title-label"
-  }, "Title:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+  }, title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     type: "text",
-    value: title,
-    onChange: titleChanged(),
+    value: inputText,
+    onChange: inputChanged(),
     className: "upload-title-input"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    onClick: handleSubmit
+    className: "confirm-button",
+    onClick: handleSubmit,
+    disabled: !matching
   }, "Delete")))));
 };
 
