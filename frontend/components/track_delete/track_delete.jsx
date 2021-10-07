@@ -13,16 +13,15 @@ const TrackDelete = (props) => {
 
   const [inputText, setInputText] = useState('');
   const [matching, setMatching] = useState(false);
-  
-  
+    
   useEffect(() => {
     checkMatching();
   }, [inputText]);
   
-
+  
   const inputChanged = () => {
     return e => {
-      setInputText(e.currentTarget.value)
+      setInputText(e.currentTarget.value);
     }
   }
   

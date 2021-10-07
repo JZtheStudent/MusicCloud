@@ -1641,12 +1641,7 @@ var ProfileHeader = /*#__PURE__*/function (_React$Component) {
         className: "profile-header-info-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_image_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         currentUser: this.props.currentUser
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_description_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "upload-background-image-button"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        className: "upload-camera-img",
-        src: window.cameraImgURL
-      }), "\xA0Upload header image"))));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_profile_description_container__WEBPACK_IMPORTED_MODULE_2__["default"], null))));
     }
   }]);
 

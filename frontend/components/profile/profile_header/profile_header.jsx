@@ -15,9 +15,9 @@ class ProfileHeader extends React.Component {
             <ProfileImageContainer currentUser={this.props.currentUser}/>
             <ProfileDescriptionContainer />
             
-            <button className="upload-background-image-button">
+            {/* <button className="upload-background-image-button">
               <img className="upload-camera-img" src={window.cameraImgURL}/>&nbsp;Upload header image
-            </button>
+            </button> */}
           </div>
         </div>
         

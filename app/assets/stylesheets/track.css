@@ -1,6 +1,6 @@
 .track {
   width: 85%;
-  height: 300px;
+  height: 275px;
   margin-bottom: 30px;
   text-align: center;
   display: flex;
@@ -8,8 +8,8 @@
 }
 
 .play-track-button {
-  width: 300px;
-  height: 300px;
+  width: 275px;
+  height: 275px;
   background: none;
   margin: 0;
   padding: 0;
@@ -19,8 +19,8 @@
 
 .track-image-container {
   background: white;
-  width: 300px;
-  height: 300px;
+  width: 275px;
+  height: 275px;
   z-index: -1;
 }
 
