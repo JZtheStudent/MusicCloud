@@ -1,4 +1,5 @@
 import React , {useState, useRef, useEffect} from 'react';
+import PlayerInfoSection from './player_info_section';
 import {BiSkipPrevious} from 'react-icons/bi';
 import {BiSkipNext} from 'react-icons/bi';
 import {BiPlay} from 'react-icons/bi';
@@ -12,16 +13,19 @@ const AudioPlayer = (props) => {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [trackTitle, setTrackTitle] = useState('');
-  
+  const [trackArtist, setTrackArtist] = useState('');
+  const [trackAlbumArtUrl, setTrackAlbumArtUrl] = useState('');
+
   //references
   const audioPlayer = useRef(); // reference our audio component
   const progressBar = useRef(); // reference our progress bar
   const animationRef = useRef(); // reference the animation
-  const songTitleRef = useRef();
   
   useEffect(() => {
     
     setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
+    setTrackArtist(props.currentTrack ? props.currentTrack.artist.username : "")
+    setTrackAlbumArtUrl(props.currentTrack ? props.currentTrack.albumArt : "") 
     setIsPlaying(props.currentTrack ? (audioPlayer.current.paused ? false : true) : false);
     animationRef.current = requestAnimationFrame(whilePlaying);
     const seconds = getDuration();
@@ -79,7 +83,6 @@ const AudioPlayer = (props) => {
     togglePlayPause();
   }
   
-  
   return (  
     <div className="audio-player-main-container">
       <div className="audio-player-container">
@@ -109,7 +112,13 @@ const AudioPlayer = (props) => {
       
         {/* duration */}
         <div className="duration">{(duration && !isNaN(duration)) ? calculateTime(duration) : "00:00"}</div>
-        <h1 ref={songTitleRef}>{trackTitle}</h1>
+
+        <PlayerInfoSection
+          trackTitle={trackTitle}
+          trackArtist={trackArtist}
+          trackAlbumArtUrl={trackAlbumArtUrl}
+          />
+        
       </div>
     </div>
     

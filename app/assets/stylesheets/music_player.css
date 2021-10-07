@@ -64,7 +64,7 @@
 }
 
 .progress-bar-container {
-  width: 800px;
+  width: 750px;
 }
 
 .progress-bar {
@@ -176,4 +176,24 @@
 .progress-bar:active::-moz-range-thumb {
   transform: scale(1.2);
   background: var(--selectedKnobby);
+}
+
+
+/*  Info section  */
+
+.player-info-section {
+  margin: 10px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.player-info-album-art {
+  width: 40px;
+  height: 40px;
+}
+
+.player-info-section-right {
+  margin-left: 10px;
+  font-size: 15px;
 }

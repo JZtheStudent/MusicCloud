@@ -310,7 +310,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AudioPlayer": () => (/* binding */ AudioPlayer)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_icons_bi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-icons/bi */ "./node_modules/react-icons/bi/index.esm.js");
+/* harmony import */ var _player_info_section__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./player_info_section */ "./frontend/components/audio_player/player_info_section.jsx");
+/* harmony import */ var react_icons_bi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/bi */ "./node_modules/react-icons/bi/index.esm.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -322,6 +323,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -351,7 +353,17 @@ var AudioPlayer = function AudioPlayer(props) {
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
       trackTitle = _useState8[0],
-      setTrackTitle = _useState8[1]; //references
+      setTrackTitle = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      trackArtist = _useState10[0],
+      setTrackArtist = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      trackAlbumArtUrl = _useState12[0],
+      setTrackAlbumArtUrl = _useState12[1]; //references
 
 
   var audioPlayer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(); // reference our audio component
@@ -360,9 +372,10 @@ var AudioPlayer = function AudioPlayer(props) {
 
   var animationRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(); // reference the animation
 
-  var songTitleRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
+    setTrackArtist(props.currentTrack ? props.currentTrack.artist.username : "");
+    setTrackAlbumArtUrl(props.currentTrack ? props.currentTrack.albumArt : "");
     setIsPlaying(props.currentTrack ? audioPlayer.current.paused ? false : true : false);
     animationRef.current = requestAnimationFrame(whilePlaying);
     var seconds = getDuration();
@@ -431,12 +444,12 @@ var AudioPlayer = function AudioPlayer(props) {
     src: props.currentTrack ? props.currentTrack.musicFile : ""
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "forward-backward"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_1__.BiSkipPrevious, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_2__.BiSkipPrevious, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "play-pause",
     onClick: togglePlayPause
-  }, isPlaying ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_1__.BiPause, null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_1__.BiPlay, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, isPlaying ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_2__.BiPause, null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_2__.BiPlay, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "forward-backward"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_1__.BiSkipNext, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_2__.BiSkipNext, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "current-time"
   }, calculateTime(currentTime)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "progress-bar-container"
@@ -448,9 +461,11 @@ var AudioPlayer = function AudioPlayer(props) {
     onChange: changeRange
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "duration"
-  }, duration && !isNaN(duration) ? calculateTime(duration) : "00:00"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-    ref: songTitleRef
-  }, trackTitle)));
+  }, duration && !isNaN(duration) ? calculateTime(duration) : "00:00"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_player_info_section__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    trackTitle: trackTitle,
+    trackArtist: trackArtist,
+    trackAlbumArtUrl: trackAlbumArtUrl
+  })));
 };
 
 
@@ -485,6 +500,47 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_audio_player__WEBPACK_IMPORTED_MODULE_1__.AudioPlayer));
+
+/***/ }),
+
+/***/ "./frontend/components/audio_player/player_info_section.jsx":
+/*!******************************************************************!*\
+  !*** ./frontend/components/audio_player/player_info_section.jsx ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var PlayerInfoSection = function PlayerInfoSection(props) {
+  var trackTitle = props.trackTitle,
+      trackArtist = props.trackArtist,
+      trackAlbumArtUrl = props.trackAlbumArtUrl;
+
+  var albumArtImage = function albumArtImage() {
+    return trackAlbumArtUrl === "" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      className: "player-info-album-art",
+      src: trackAlbumArtUrl
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "player-info-section"
+  }, albumArtImage(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "player-info-section-right"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    style: {
+      color: 'gray'
+    }
+  }, trackArtist), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, trackTitle)));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PlayerInfoSection);
 
 /***/ }),
 
