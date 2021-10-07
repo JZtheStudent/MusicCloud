@@ -128,6 +128,8 @@ var signup = function signup(user) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_ALL_TRACKS": () => (/* binding */ RECEIVE_ALL_TRACKS),
+/* harmony export */   "fetchTracks": () => (/* binding */ fetchTracks),
 /* harmony export */   "createTrack": () => (/* binding */ createTrack),
 /* harmony export */   "updateTrack": () => (/* binding */ updateTrack),
 /* harmony export */   "deleteTrack": () => (/* binding */ deleteTrack)
@@ -136,6 +138,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _users_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_actions */ "./frontend/actions/users_actions.js");
 
 
+var RECEIVE_ALL_TRACKS = 'RECEIVE_ALL_TRACKS';
+
+var receiveAllTracks = function receiveAllTracks(tracks) {
+  return {
+    type: RECEIVE_ALL_TRACKS,
+    tracks: tracks
+  };
+};
+
+var fetchTracks = function fetchTracks() {
+  return function (dispatch) {
+    return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchTracks().then(function (tracks) {
+      return dispatch(receiveAllTracks(tracks));
+    });
+  };
+};
 var createTrack = function createTrack(track, userId) {
   return function (dispatch) {
     return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.createTrack(track, userId).then(function () {
@@ -556,7 +574,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _track_index_track_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../track_index/track_index */ "./frontend/components/track_index/track_index.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -579,47 +597,67 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-
-
+ // const Discover = (props) => {
+//   useEffect(() => {
+//     props.fetchTracks();
+//   });
+//   return (  
+//     <div className="discover-page-container">
+//       <ul>
+//         {
+//           props.tracks.map(track => (
+//             <TrackIndex 
+//               key={track.id}
+//               track={track}
+//               play={props.receiveCurrentTrack}/>
+//           ))
+//         }
+//       </ul>
+//     </div>
+//   );
+// }
+// export default Discover;
 
 var Discover = /*#__PURE__*/function (_React$Component) {
   _inherits(Discover, _React$Component);
 
   var _super = _createSuper(Discover);
 
-  function Discover(props) {
-    var _this;
-
+  function Discover() {
     _classCallCheck(this, Discover);
 
-    _this = _super.call(this, props);
-
-    _defineProperty(_assertThisInitialized(_this), "handleClick", function () {
-      _this.props.history.push('/stream');
-    });
-
-    _this.state = {};
-    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
-    return _this;
+    return _super.apply(this, arguments);
   }
 
   _createClass(Discover, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchTracks();
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "discover-page-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-        className: "discover-header"
-      }, "COMING SOON"));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "discover-page-list"
+      }, this.props.tracks.map(function (track) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_track_index_track_index__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: track.id,
+          track: track,
+          play: _this.props.receiveCurrentTrack
+        });
+      })));
     }
   }]);
 
   return Discover;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.withRouter)(Discover));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Discover);
 
 /***/ }),
 
@@ -634,22 +672,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _discover__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./discover */ "./frontend/components/discover/discover.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _discover__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./discover */ "./frontend/components/discover/discover.jsx");
+/* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
+/* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/player_actions */ "./frontend/actions/player_actions.js");
+
 
 
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {};
+  return {
+    tracks: Object.values(state.entities.tracks)
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    fetchTracks: function fetchTracks() {
+      return dispatch((0,_actions_track_actions__WEBPACK_IMPORTED_MODULE_2__.fetchTracks)());
+    },
+    receiveCurrentTrack: function receiveCurrentTrack(track) {
+      return dispatch((0,_actions_player_actions__WEBPACK_IMPORTED_MODULE_3__.receiveCurrentTrack)(track));
+    }
+  };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_discover__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_discover__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -1128,7 +1177,7 @@ var NavAuth = function NavAuth(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
       className: "right-nav"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-      to: "profile"
+      to: "profile/tracks"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
       className: "greeting"
     }, "Hi ", currentUser.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -2593,6 +2642,49 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/track_index/track_index.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/track_index/track_index.jsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var TrackIndex = function TrackIndex(_ref) {
+  var track = _ref.track,
+      play = _ref.play;
+
+  var playClicked = function playClicked() {
+    play(track);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "dicover-index-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "track-image-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "play-track-button",
+    onClick: playClicked
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    className: "track-image",
+    src: track.albumArt
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "discover-track-title"
+  }, track.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "discover-track-artist"
+  }, track.artist.username));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TrackIndex);
+
+/***/ }),
+
 /***/ "./frontend/components/upload/upload.jsx":
 /*!***********************************************!*\
   !*** ./frontend/components/upload/upload.jsx ***!
@@ -3121,6 +3213,9 @@ var tracksReducer = function tracksReducer() {
   Object.freeze(state);
 
   switch (action.type) {
+    case _actions_track_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_TRACKS:
+      return Object.assign({}, state, action.tracks);
+
     default:
       return state;
   }
@@ -3403,10 +3498,17 @@ var logout = function logout() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchTracks": () => (/* binding */ fetchTracks),
 /* harmony export */   "createTrack": () => (/* binding */ createTrack),
 /* harmony export */   "updateTrack": () => (/* binding */ updateTrack),
 /* harmony export */   "deleteTrack": () => (/* binding */ deleteTrack)
 /* harmony export */ });
+var fetchTracks = function fetchTracks() {
+  return $.ajax({
+    url: "/api/tracks",
+    method: 'GET'
+  });
+};
 var createTrack = function createTrack(track, userId) {
   return $.ajax({
     url: "/api/users/".concat(userId, "/tracks"),

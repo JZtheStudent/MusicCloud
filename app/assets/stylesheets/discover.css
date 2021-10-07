@@ -1,11 +1,22 @@
-.discover-page-container {
-  height: 1000px;
+.discover-page-list {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  
 }
 
-.discover-header {
-  font-size: 50px;
-  font-weight: 800;
+.discover-page-list > * {
+  margin: 10px;
+  text-align: center;
+}
+
+.discover-track-title {
+  margin-top: 2px;
+  font-size: 15px;
+  color: black;
+  font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
+}
+
+.discover-track-artist {
+  font-size: 13px;
+  color: gray;
+  font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
 }
