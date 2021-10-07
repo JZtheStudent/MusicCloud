@@ -50,4 +50,14 @@ body {
 
 .confirm-button:hover {
   opacity: 80%;
+  cursor: pointer;
+}
+
+.confirm-button:disabled {
+  background-color: gray;
+}
+
+.confirm-button:disabled:hover {
+  opacity: 100%;
+  cursor: not-allowed;
 }
