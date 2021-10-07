@@ -15,10 +15,14 @@ const Nav = () => {
           
           <PageNavContainer />
         </div>
-        
         <NavAuthContainer />
       </div>
-      
+      <div className="my-links">  
+        <a href="https://github.com/JZtheStudent" target="_blank"><img className="social-logo" src={window.githubUrl}/></a>
+        <a href="https://www.instagram.com/joshc_zhao/" target="_blank"><img className="social-logo" src={window.instagramUrl}/></a>
+        <a href="https://www.linkedin.com/in/zhaojc/" target="_blank"><img className="social-logo" src={window.linkedinUrl}/></a>
+      </div>
+
     </div>
   );
 }

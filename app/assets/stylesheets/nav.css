@@ -93,3 +93,24 @@
 .auth-button {
   margin-left: 5px;
 }
+
+.my-links {
+  position: absolute;
+  height: 46px;
+  right: 0;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.social-logo {
+  height: 30px;
+  width: auto;
+  margin-right: 7px;
+  opacity: 80%;
+  transition: opacity .2s ease-in-out;
+}
+
+.social-logo:hover {
+  opacity: 100%;
+}
