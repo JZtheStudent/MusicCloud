@@ -1,8 +1,8 @@
 import React , {useState, useRef, useEffect} from 'react';
-import {BiArrowToRight} from 'react-icons/bi'
-import {BiArrowToLeft} from 'react-icons/bi'
-import {ImPlay3} from 'react-icons/im'
-import {ImPause2} from 'react-icons/im'
+import {BiSkipPrevious} from 'react-icons/bi';
+import {BiSkipNext} from 'react-icons/bi';
+import {BiPlay} from 'react-icons/bi';
+import {BiPause} from 'react-icons/bi';
 
 // useEffect is for fetching
 
@@ -12,7 +12,7 @@ const AudioPlayer = (props) => {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [trackTitle, setTrackTitle] = useState('');
-
+  
   //references
   const audioPlayer = useRef(); // reference our audio component
   const progressBar = useRef(); // reference our progress bar
@@ -81,35 +81,38 @@ const AudioPlayer = (props) => {
   
   
   return (  
-    <div className="audio-player-container">
-      <audio autoPlay ref={audioPlayer} src={props.currentTrack ? props.currentTrack.musicFile : ""}></audio>
-      
-      <h1 ref={songTitleRef}>{trackTitle}</h1>
-      <button className="forward-backward"><BiArrowToLeft/></button>
-      <button className="play-pause" onClick={togglePlayPause} >
-        {isPlaying ? <ImPause2 /> : <ImPlay3 className="play"/>}
-      </button>
-      <button className="forward-backward"><BiArrowToRight/></button>
-      
+    <div className="audio-player-main-container">
+      <div className="audio-player-container">
+        <audio autoPlay ref={audioPlayer} src={props.currentTrack ? props.currentTrack.musicFile : ""}></audio>
+        
+        
+        <button className="forward-backward"><BiSkipPrevious/></button>
+        <button className="play-pause" onClick={togglePlayPause} >
+          {isPlaying ? <BiPause /> : <BiPlay />}
+        </button>
+        <button className="forward-backward"><BiSkipNext/></button>
+        
 
-      {/* current time */}
-      <div className="current-time">{calculateTime(currentTime)}</div>
+        {/* current time */}
+        <div className="current-time">{calculateTime(currentTime)}</div>
+        
+        
+        {/* progress bar */}
+        <div className="progress-bar-container">
+          <input 
+            className="progress-bar" 
+            type="range" 
+            defaultValue="0" 
+            ref={progressBar} 
+            onChange={changeRange}/>
+        </div>
       
-      
-      {/* progress bar */}
-      <div>
-        <input 
-          className="progress-bar" 
-          type="range" 
-          defaultValue="0" 
-          ref={progressBar} 
-          onChange={changeRange}/>
+        {/* duration */}
+        <div className="duration">{(duration && !isNaN(duration)) ? calculateTime(duration) : "00:00"}</div>
+        <h1 ref={songTitleRef}>{trackTitle}</h1>
       </div>
-    
-      {/* duration */}
-      <div className="duration">{(duration && !isNaN(duration)) ? calculateTime(duration) : "00:00"}</div>
-
     </div>
+    
   );
 }
  

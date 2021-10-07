@@ -35,14 +35,11 @@ const App = () => {
             <ProtectedRoute exact path="/delete_track" component={TrackDeleteContainer} />
             <Redirect to="/discover" />
           </Switch>
-          <AudioPlayerContainer />
+          
         </div>
-        
-        
-        
       </div>
     
-      
+      <AudioPlayerContainer />
     
     
     
