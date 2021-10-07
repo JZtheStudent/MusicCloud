@@ -8,10 +8,10 @@
       window.logoURL = "<%= image_url('soundcloud-logo.png') %>";
       window.cameraImgURL = "<%= image_url('camera-upload.png') %>";
 
-      window.trackUrl = "<%= audio_url('paris.mp3') %>";
     </script>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <%= favicon_link_tag asset_path('soundcloud.ico') %>
   </head>
   
   <body>

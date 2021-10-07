@@ -76,12 +76,18 @@
   box-sizing: border-box;
   text-align: center;
   width: 104px;
-  text-decoration: none;
   font-family: Interstate,Lucida Grande,Arial,sans-serif;
   font-size: 14px;
   white-space: nowrap;
 }
 
+.greeting:hover {
+  color: white;
+}
+
+.greeting-link {
+  text-decoration: none;
+}
 
 
 .auth-button {
