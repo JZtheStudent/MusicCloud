@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[link to live site:](https://music-cloud420.herokuapp.com/#/discover)
 
-Things you may want to cover:
+# Welcome to MusicCloud
 
-* Ruby version
+# About the Project
+Everyone's heard about Soundcloud. It's a music application similar to Spotify and Apple Music, except users can upload their own tracks. The project was creating with a Ruby on Rails backend and React/Redux frontend. Assets are stored using Amazon's AWS S3. 
 
-* System dependencies
+# Special Features
 
-* Configuration
+## Music Player
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![image](https://user-images.githubusercontent.com/79537340/136595801-a0452d44-3fd8-476b-847f-f882c6d20b59.png)
