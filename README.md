@@ -37,3 +37,29 @@ In addition, my use of React hooks (including useEffect) enabled the functional 
 ## Deleting Tracks
 
 ![image](https://user-images.githubusercontent.com/79537340/136597282-537d6f7a-2db6-41e0-8479-2054829d994d.png)
+
+When a user wants to delete one of their tracks through their profile page, they will be taken to a special confirmation page. On this page, the user will have to type in the name of the track that they want to delete in order for the "delete" button to be enabled. I achieved this functionality with, yet again, react hooks. Since setting state in react is asynchronous and `.then()` does not work in functional components, I utilized `useEffect` to watch for changes in the input form.
+
+```javascript
+ 
+  useEffect(() => {
+    checkMatching();
+  }, [inputText]);
+  
+  
+  const inputChanged = () => {
+    return e => {
+      setInputText(e.currentTarget.value);
+    }
+  }
+  
+  const checkMatching = () => {
+    if (inputText === title) {
+      setMatching(true);
+    } else {
+      setMatching(false);
+    }
+  }
+ 
+```
+
