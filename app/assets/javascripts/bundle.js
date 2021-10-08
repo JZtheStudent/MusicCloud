@@ -2976,6 +2976,7 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
         className: "upload-note-img",
         src: window.cameraImgURL
       }), "\xA0Upload Mp3")), this.state.musicFile ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Music File Uploaded!")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "confirm-button",
         onClick: this.handleSubmit
       }, "Upload")));
     }

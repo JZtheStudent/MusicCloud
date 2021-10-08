@@ -94,7 +94,7 @@ class UploadForm extends React.Component {
               }
             </div>
             
-            <button onClick={this.handleSubmit}>Upload</button>
+            <button className="confirm-button" onClick={this.handleSubmit}>Upload</button>
     
       
           

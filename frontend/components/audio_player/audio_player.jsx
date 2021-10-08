@@ -21,17 +21,17 @@ const AudioPlayer = (props) => {
   const progressBar = useRef(); // reference our progress bar
   const animationRef = useRef(); // reference the animation
   
-  useEffect(() => {
-    
-    setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
-    setTrackArtist(props.currentTrack ? props.currentTrack.artist.username : "")
-    setTrackAlbumArtUrl(props.currentTrack ? props.currentTrack.albumArt : "") 
-    setIsPlaying(props.currentTrack ? (audioPlayer.current.paused ? false : true) : false);
-    animationRef.current = requestAnimationFrame(whilePlaying);
-    const seconds = getDuration();
-    setDuration(seconds);
-    progressBar.current.max = seconds;
-  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
+useEffect(() => {
+  
+  setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
+  setTrackArtist(props.currentTrack ? props.currentTrack.artist.username : "")
+  setTrackAlbumArtUrl(props.currentTrack ? props.currentTrack.albumArt : "") 
+  setIsPlaying(props.currentTrack ? (audioPlayer.current.paused ? false : true) : false);
+  animationRef.current = requestAnimationFrame(whilePlaying);
+  const seconds = getDuration();
+  setDuration(seconds);
+  progressBar.current.max = seconds;
+}, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
   
   const calculateTime = (secs) => {
     const minutes = Math.floor( secs/60 ) 
