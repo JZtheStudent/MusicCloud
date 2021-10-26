@@ -6,7 +6,8 @@ class Api::TracksController < ApplicationController
   end
 
   def show 
-    
+    @track = Track.find_by(id: params[:id])
+    render :show
   end
 
   def create 

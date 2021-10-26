@@ -394,6 +394,7 @@ var AudioPlayer = function AudioPlayer(props) {
   var animationRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(); // reference the animation
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    audioPlayer.current.volume = 0.3;
     setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
     setTrackArtist(props.currentTrack ? props.currentTrack.artist.username : "");
     setTrackAlbumArtUrl(props.currentTrack ? props.currentTrack.albumArt : "");

@@ -22,7 +22,7 @@ const AudioPlayer = (props) => {
   const animationRef = useRef(); // reference the animation
   
 useEffect(() => {
-  
+  audioPlayer.current.volume = 0.3;
   setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
   setTrackArtist(props.currentTrack ? props.currentTrack.artist.username : "")
   setTrackAlbumArtUrl(props.currentTrack ? props.currentTrack.albumArt : "") 
@@ -42,6 +42,7 @@ useEffect(() => {
   }
   
   const togglePlayPause = () => {
+    
     const seconds = getDuration();
     setDuration(seconds);
 
@@ -57,6 +58,7 @@ useEffect(() => {
   }
   
   const whilePlaying = () => {
+    
     if (audioPlayer.current.currentTime === audioPlayer.current.duration) {
       handleSongEnded();
     }
@@ -83,7 +85,10 @@ useEffect(() => {
     togglePlayPause();
   }
   
+  
+  
   return (  
+    
     <div className="audio-player-main-container">
       <div className="audio-player-container">
         <audio autoPlay ref={audioPlayer} src={props.currentTrack ? props.currentTrack.musicFile : ""}></audio>
