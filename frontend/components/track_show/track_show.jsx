@@ -1,5 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router';
+import TrackShowHeaderContainer from './track_show_header_container';
 
 class TrackShow extends React.Component {
   componentDidMount() {
@@ -20,9 +21,7 @@ class TrackShow extends React.Component {
     
     return ( 
       <div>
-        <h1>Track Show</h1>
-        <h1>{track.title}</h1>
-        <h1>{currentUser.username}</h1>
+        <TrackShowHeaderContainer track={track} />
       </div> 
       
     );
