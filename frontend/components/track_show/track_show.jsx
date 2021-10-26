@@ -1,8 +1,10 @@
 import React from 'react';
+import {withRouter} from 'react-router';
 
 class TrackShow extends React.Component {
   componentDidMount() {
-    this.props.fetchTrack(1);
+    const id = this.props.match.params.id;
+    this.props.fetchTrack(id);
   }
 
   constructor(props) {
@@ -27,4 +29,4 @@ class TrackShow extends React.Component {
   }
 }
  
-export default TrackShow;
+export default withRouter(TrackShow);

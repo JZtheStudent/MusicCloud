@@ -27,7 +27,7 @@ const App = () => {
         <div className="main-page-inner-container">
           <Switch >
             <Route exact path="/discover" component={DiscoverContainer} />
-            <Route path="/tracks/:id" component={TrackShowContainer} />
+            <Route exact path="/tracks/:id" component={TrackShowContainer} />
             <ProtectedRoute exact path="/library" component={LibraryContainer}/>
             <ProtectedRoute exact path="/profile" component={ProfileContainer} />
             <ProtectedRoute exact path="/profile/tracks" component={ProfileTracksContainer} /> 
@@ -35,7 +35,7 @@ const App = () => {
             <ProtectedRoute exact path="/upload" component={UploadContainer} />
             <ProtectedRoute exact path="/edit_track" component={EditTrackContainer} />
             <ProtectedRoute exact path="/delete_track" component={TrackDeleteContainer} />
-            {/* <Redirect to="/discover" /> */}
+            <Redirect to="/discover" />
           </Switch>
           
         </div>

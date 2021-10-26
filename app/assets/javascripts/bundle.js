@@ -299,6 +299,7 @@ var App = function App() {
     path: "/discover",
     component: _discover_discover_container__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
+    exact: true,
     path: "/tracks/:id",
     component: _track_show_track_show_container__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
@@ -329,6 +330,8 @@ var App = function App() {
     exact: true,
     path: "/delete_track",
     component: _track_delete_track_delete_container__WEBPACK_IMPORTED_MODULE_11__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Redirect, {
+    to: "/discover"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_audio_player_audio_player_container__WEBPACK_IMPORTED_MODULE_13__["default"], null));
 };
 
@@ -619,26 +622,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
- // const Discover = (props) => {
-//   useEffect(() => {
-//     props.fetchTracks();
-//   });
-//   return (  
-//     <div className="discover-page-container">
-//       <ul>
-//         {
-//           props.tracks.map(track => (
-//             <TrackIndex 
-//               key={track.id}
-//               track={track}
-//               play={props.receiveCurrentTrack}/>
-//           ))
-//         }
-//       </ul>
-//     </div>
-//   );
-// }
-// export default Discover;
+
 
 var Discover = /*#__PURE__*/function (_React$Component) {
   _inherits(Discover, _React$Component);
@@ -2449,6 +2433,7 @@ var Track = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {};
     _this.playClicked = _this.playClicked.bind(_assertThisInitialized(_this));
+    _this.trackClicked = _this.trackClicked.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2461,6 +2446,7 @@ var Track = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var _this$props$track = this.props.track,
+          id = _this$props$track.id,
           title = _this$props$track.title,
           artist = _this$props$track.artist,
           albumArt = _this$props$track.albumArt;
@@ -2470,9 +2456,9 @@ var Track = /*#__PURE__*/function (_React$Component) {
         className: "track-left-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "track-image-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         className: "play-track-button",
-        onClick: this.playClicked
+        to: "/tracks/".concat(id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "track-image",
         src: albumArt
@@ -2699,6 +2685,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 var TrackIndex = function TrackIndex(_ref) {
@@ -2713,9 +2701,9 @@ var TrackIndex = function TrackIndex(_ref) {
     className: "dicover-index-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "track-image-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     className: "play-track-button",
-    onClick: playClicked
+    to: "/tracks/".concat(track.id)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
     className: "track-image",
     src: track.albumArt
@@ -2742,6 +2730,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2766,6 +2755,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var TrackShow = /*#__PURE__*/function (_React$Component) {
   _inherits(TrackShow, _React$Component);
 
@@ -2784,7 +2774,8 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
   _createClass(TrackShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchTrack(1);
+      var id = this.props.match.params.id;
+      this.props.fetchTrack(id);
     }
   }, {
     key: "render",
@@ -2800,7 +2791,7 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
   return TrackShow;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TrackShow);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router__WEBPACK_IMPORTED_MODULE_1__.withRouter)(TrackShow));
 
 /***/ }),
 

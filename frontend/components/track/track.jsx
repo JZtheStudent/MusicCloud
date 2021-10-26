@@ -8,22 +8,26 @@ class Track extends React.Component {
     super(props);
     this.state = {  }
     this.playClicked = this.playClicked.bind(this);
+    this.trackClicked = this.trackClicked.bind(this);
   }
   
   playClicked() {
     this.props.receiveCurrentTrack(this.props.track);
   }
   
-  
+ 
   render() { 
-    const { title, artist, albumArt } = this.props.track;
+    const { id, title, artist, albumArt } = this.props.track;
     return (  
       <div className="track">
         <div className="track-left-container">
           <div className="track-image-container">
-            <button className="play-track-button" onClick={this.playClicked}>
+            {/* <button className="play-track-button" onClick={this.playClicked}>
               <img className="track-image" src={albumArt}/>
-            </button>
+            </button> */}
+            <Link className="play-track-button" to={`/tracks/${id}`}>
+              <img className="track-image" src={albumArt}/>
+            </Link>
           </div>
           <h2 className="play-text">Play</h2>
         </div>
