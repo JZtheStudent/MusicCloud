@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :tracks, only: [:create, :update, :destroy]
     end
     resource :session, only: [:create, :destroy]
-    resources :tracks, only: [:index]
+    resources :tracks, only: [:index, :show]
 
     get "/users/:id/tracks", to: 'users#tracks'
   end

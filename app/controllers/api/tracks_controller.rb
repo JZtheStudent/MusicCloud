@@ -5,6 +5,10 @@ class Api::TracksController < ApplicationController
     render :index
   end
 
+  def show 
+    
+  end
+
   def create 
     @track = Track.new(track_params)
     if @track.save
