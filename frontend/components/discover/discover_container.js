@@ -4,7 +4,7 @@ import { fetchTracks } from '../../actions/track_actions';
 import { receiveCurrentTrack } from "../../actions/player_actions";
 
 const mapStateToProps = state => ({
-  tracks: Object.values(state.entities.tracks)
+  tracks: Object.values(state.entities.trackIndex)
 });
 
 const mapDispatchToProps = dispatch => ({

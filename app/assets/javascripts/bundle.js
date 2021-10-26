@@ -129,7 +129,9 @@ var signup = function signup(user) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_ALL_TRACKS": () => (/* binding */ RECEIVE_ALL_TRACKS),
+/* harmony export */   "RECEIVE_TRACK": () => (/* binding */ RECEIVE_TRACK),
 /* harmony export */   "fetchTracks": () => (/* binding */ fetchTracks),
+/* harmony export */   "fetchTrack": () => (/* binding */ fetchTrack),
 /* harmony export */   "createTrack": () => (/* binding */ createTrack),
 /* harmony export */   "updateTrack": () => (/* binding */ updateTrack),
 /* harmony export */   "deleteTrack": () => (/* binding */ deleteTrack)
@@ -139,6 +141,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var RECEIVE_ALL_TRACKS = 'RECEIVE_ALL_TRACKS';
+var RECEIVE_TRACK = 'RECEIVE_TRACK';
 
 var receiveAllTracks = function receiveAllTracks(tracks) {
   return {
@@ -147,10 +150,24 @@ var receiveAllTracks = function receiveAllTracks(tracks) {
   };
 };
 
+var receiveTrack = function receiveTrack(track) {
+  return {
+    type: RECEIVE_TRACK,
+    track: track
+  };
+};
+
 var fetchTracks = function fetchTracks() {
   return function (dispatch) {
     return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchTracks().then(function (tracks) {
       return dispatch(receiveAllTracks(tracks));
+    });
+  };
+};
+var fetchTrack = function fetchTrack(trackId) {
+  return function (dispatch) {
+    return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchTrack(trackId).then(function (track) {
+      return dispatch(receiveTrack(track));
     });
   };
 };
@@ -687,7 +704,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    tracks: Object.values(state.entities.tracks)
+    tracks: Object.values(state.entities.trackIndex)
   };
 };
 
@@ -2765,9 +2782,18 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(TrackShow, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchTrack(1);
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Track Show");
+      var _this$props = this.props,
+          track = _this$props.track,
+          currentUser = _this$props.currentUser;
+      if (!track) return null;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Track Show"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, track.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, currentUser.username));
     }
   }]);
 
@@ -2791,15 +2817,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _track_show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track_show */ "./frontend/components/track_show/track_show.jsx");
+/* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {};
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var session = _ref.session,
+      entities = _ref.entities;
+  return {
+    currentUser: entities.user[session.id],
+    track: entities.trackShow
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    fetchTrack: function fetchTrack(trackId) {
+      return dispatch((0,_actions_track_actions__WEBPACK_IMPORTED_MODULE_2__.fetchTrack)(trackId));
+    }
+  };
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_track_show__WEBPACK_IMPORTED_MODULE_1__["default"]));
@@ -3097,17 +3134,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _tracks_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tracks_reducer */ "./frontend/reducers/tracks_reducer.js");
 /* harmony import */ var _user_tracks_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user_tracks_reducer */ "./frontend/reducers/user_tracks_reducer.js");
+/* harmony import */ var _track_show_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./track_show_reducer */ "./frontend/reducers/track_show_reducer.js");
 
 
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
   user: _users_reducer__WEBPACK_IMPORTED_MODULE_0__["default"],
-  tracks: _tracks_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  trackIndex: _tracks_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  trackShow: _track_show_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
   userTracks: _user_tracks_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
@@ -3312,6 +3352,38 @@ var sessionReducer = function sessionReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sessionReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/track_show_reducer.js":
+/*!*************************************************!*\
+  !*** ./frontend/reducers/track_show_reducer.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/track_actions */ "./frontend/actions/track_actions.js");
+
+
+var trackShowReducer = function trackShowReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_track_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_TRACK:
+      return Object.assign({}, state, action.track);
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (trackShowReducer);
 
 /***/ }),
 
@@ -3621,6 +3693,7 @@ var logout = function logout() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchTracks": () => (/* binding */ fetchTracks),
+/* harmony export */   "fetchTrack": () => (/* binding */ fetchTrack),
 /* harmony export */   "createTrack": () => (/* binding */ createTrack),
 /* harmony export */   "updateTrack": () => (/* binding */ updateTrack),
 /* harmony export */   "deleteTrack": () => (/* binding */ deleteTrack)
@@ -3628,6 +3701,12 @@ __webpack_require__.r(__webpack_exports__);
 var fetchTracks = function fetchTracks() {
   return $.ajax({
     url: "/api/tracks",
+    method: 'GET'
+  });
+};
+var fetchTrack = function fetchTrack(trackId) {
+  return $.ajax({
+    url: "/api/tracks/".concat(trackId),
     method: 'GET'
   });
 };
