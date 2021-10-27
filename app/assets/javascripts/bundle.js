@@ -173,7 +173,7 @@ var fetchTrack = function fetchTrack(trackId) {
 };
 var createTrack = function createTrack(track, userId) {
   return function (dispatch) {
-    return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.createTrack(track, userId).then(function () {
+    return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.createTrack(track).then(function () {
       return dispatch((0,_users_actions__WEBPACK_IMPORTED_MODULE_1__.fetchUserTracks)(userId));
     });
   };
@@ -2206,7 +2206,6 @@ var Track = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {};
     _this.playClicked = _this.playClicked.bind(_assertThisInitialized(_this));
-    _this.trackClicked = _this.trackClicked.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3679,9 +3678,9 @@ var fetchTrack = function fetchTrack(trackId) {
     method: 'GET'
   });
 };
-var createTrack = function createTrack(track, userId) {
+var createTrack = function createTrack(track) {
   return $.ajax({
-    url: "/api/users/".concat(userId, "/tracks"),
+    url: "/api/tracks",
     method: 'POST',
     data: track,
     contentType: false,

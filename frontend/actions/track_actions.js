@@ -26,7 +26,7 @@ export const fetchTrack = trackId => dispatch => (
 )
 
 export const createTrack = (track, userId) => dispatch => (
-  TrackApiUtil.createTrack(track, userId)
+  TrackApiUtil.createTrack(track)
     .then(() => dispatch(fetchUserTracks(userId)))
 );
 

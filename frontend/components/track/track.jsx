@@ -8,7 +8,6 @@ class Track extends React.Component {
     super(props);
     this.state = {  }
     this.playClicked = this.playClicked.bind(this);
-    this.trackClicked = this.trackClicked.bind(this);
   }
   
   playClicked() {
