@@ -1191,7 +1191,7 @@ var NavAuth = function NavAuth(_ref) {
       className: "right-nav"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
       className: "greeting-link",
-      to: "profile/tracks"
+      to: "/profile"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
       className: "greeting"
     }, "Hi ", currentUser.username, "!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {

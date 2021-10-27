@@ -9,7 +9,7 @@ class TrackShowHeader extends React.Component {
     return (  
       <div className="track-show-header">
         <div className="track-show-background-no-image">
-
+        
         </div>
       </div>
     );
