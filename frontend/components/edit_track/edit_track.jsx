@@ -19,7 +19,7 @@ const EditTrack = (props) => {
     const formData = new FormData();
     formData.append('track[title]', title);
     props.updateTrack(formData, artistId, trackId)
-      .then(props.history.push('/profile/tracks'));
+      .then(props.history.push('/profile'));
   }
 
   return (  

@@ -36,10 +36,10 @@ const TrackDelete = (props) => {
   const handleSubmit = e => {
     e.preventDefault();
     props.deleteTrack(artistId, trackId)
-      .then(props.history.push('/profile/tracks'))
+      .then(props.history.push('/profile'))
       .then(window.location.reload());
   }
-
+  
   return (  
     <div className="upload-outer-container">
       <div className="upload-inner-container">

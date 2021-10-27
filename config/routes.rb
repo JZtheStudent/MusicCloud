@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create, :update, :show] do 
-      resources :tracks, only: [:update, :destroy]
+      resources :tracks, only: [:update, ]
     end
     resource :session, only: [:create, :destroy]
-    resources :tracks, only: [:index, :show, :create]
+    resources :tracks, only: [:index, :show, :create, :destroy]
 
     get "/users/:id/tracks", to: 'users#tracks'
   end

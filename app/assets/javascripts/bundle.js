@@ -187,7 +187,8 @@ var updateTrack = function updateTrack(data, userId, trackId) {
 };
 var deleteTrack = function deleteTrack(userId, trackId) {
   return function (dispatch) {
-    return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteTrack(userId, trackId).then(function () {
+    console.log('in delete action');
+    return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteTrack(trackId).then(function () {
       return dispatch((0,_users_actions__WEBPACK_IMPORTED_MODULE_1__.fetchUserTracks)(userId));
     });
   };
@@ -746,7 +747,7 @@ var EditTrack = function EditTrack(props) {
     e.preventDefault();
     var formData = new FormData();
     formData.append('track[title]', title);
-    props.updateTrack(formData, artistId, trackId).then(props.history.push('/profile/tracks'));
+    props.updateTrack(formData, artistId, trackId).then(props.history.push('/profile'));
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2375,7 +2376,7 @@ var TrackDelete = function TrackDelete(props) {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    props.deleteTrack(artistId, trackId).then(props.history.push('/profile/tracks')).then(window.location.reload());
+    props.deleteTrack(artistId, trackId).then(props.history.push('/profile')).then(window.location.reload());
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3023,7 +3024,7 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
       formData.append('track[music_file]', this.state.musicFile);
       formData.append('track[artist_id]', this.props.currentUserId);
       this.props.createTrack(formData, this.props.currentUserId).then(function () {
-        return _this2.props.history.push('/profile/tracks');
+        return _this2.props.history.push('/profile');
       });
     }
   }, {
@@ -3689,16 +3690,16 @@ var createTrack = function createTrack(track) {
 };
 var updateTrack = function updateTrack(data, userId, trackId) {
   return $.ajax({
-    url: "api/users/".concat(userId, "/tracks/").concat(trackId),
+    url: "/api/users/".concat(userId, "/tracks/").concat(trackId),
     method: 'PATCH',
     data: data,
     contentType: false,
     processData: false
   });
 };
-var deleteTrack = function deleteTrack(userId, trackId) {
+var deleteTrack = function deleteTrack(trackId) {
   return $.ajax({
-    url: "api/users/".concat(userId, "/tracks/").concat(trackId),
+    url: "/api/tracks/".concat(trackId),
     method: 'DELETE'
   });
 };

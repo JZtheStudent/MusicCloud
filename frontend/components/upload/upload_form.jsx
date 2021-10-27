@@ -36,7 +36,7 @@ class UploadForm extends React.Component {
     formData.append('track[music_file]', this.state.musicFile);
     formData.append('track[artist_id]',this.props.currentUserId);
     this.props.createTrack(formData, this.props.currentUserId)
-      .then(() => this.props.history.push('/profile/tracks'));
+      .then(() => this.props.history.push('/profile'));
   }
 
   change(item) {

@@ -35,7 +35,8 @@ export const updateTrack = (data, userId, trackId) => dispatch => (
     .then(() => dispatch(fetchUserTracks(userId)))
 )
 
-export const deleteTrack = (userId, trackId) => dispatch => (
-  TrackApiUtil.deleteTrack(userId, trackId)
+export const deleteTrack = (userId, trackId) => dispatch => {
+  console.log('in delete action');
+  return TrackApiUtil.deleteTrack(trackId)
     .then(() => dispatch(fetchUserTracks(userId)))
-)
+}

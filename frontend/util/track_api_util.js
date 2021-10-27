@@ -25,7 +25,7 @@ export const createTrack = (track) => (
 
 export const updateTrack = (data, userId, trackId) => (
   $.ajax({
-    url: `api/users/${userId}/tracks/${trackId}`,
+    url: `/api/users/${userId}/tracks/${trackId}`,
     method: 'PATCH',
     data: data,
     contentType: false,
@@ -33,9 +33,9 @@ export const updateTrack = (data, userId, trackId) => (
   })
 )
 
-export const deleteTrack = (userId, trackId) => (
+export const deleteTrack = (trackId) => (
   $.ajax({
-    url: `api/users/${userId}/tracks/${trackId}`,
+    url: `/api/tracks/${trackId}`,
     method: 'DELETE'
   })
 )
