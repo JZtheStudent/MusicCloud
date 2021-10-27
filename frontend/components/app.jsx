@@ -5,9 +5,7 @@ import Nav from './nav/nav';
 import Modal from './modal/modal';
 import DiscoverContainer from './discover/discover_container';
 import LibraryContainer from './library/library_container';
-import ProfileContainer from './profile/profile_container';
 import ProfileTracksContainer from './profile/profile_tracks_container'
-import ProfilePlaylistsContainer from './profile/profile_playlists_container';
 import UploadContainer from './upload/upload_container';
 import EditTrackContainer from './edit_track/edit_track_container';
 import TrackDeleteContainer from './track_delete/track_delete_container';
@@ -29,9 +27,7 @@ const App = () => {
             <Route exact path="/discover" component={DiscoverContainer} />
             <Route exact path="/tracks/:id" component={TrackShowContainer} />
             <ProtectedRoute exact path="/library" component={LibraryContainer}/>
-            <ProtectedRoute exact path="/profile" component={ProfileContainer} />
-            <ProtectedRoute exact path="/profile/tracks" component={ProfileTracksContainer} /> 
-            <ProtectedRoute exact path="/profile/playlists" component={ProfilePlaylistsContainer} />
+            <ProtectedRoute exact path="/profile" component={ProfileTracksContainer} />
             <ProtectedRoute exact path="/upload" component={UploadContainer} />
             <ProtectedRoute exact path="/edit_track" component={EditTrackContainer} />
             <ProtectedRoute exact path="/delete_track" component={TrackDeleteContainer} />
