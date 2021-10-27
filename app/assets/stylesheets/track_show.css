@@ -30,26 +30,56 @@
 
 .track-show-header-info {
   display: flex;
-}
-
-.track-show-play-pause {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(#f70,#f30);
-  color: #fff;
-  font-size: 30px;
   margin-top: 40px;
   margin-left: 40px;
+}
+
+.track-show-play-pause-button {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(#f70,#f30);
+  color: #fff;
+  margin-right: 10px;
   border: none;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.track-show-play-pause-button:hover {
+  opacity: 80%;
+}
+
+.track-show-play {
+  position: relative;
+  left: 5px;
+  font-size: 60px;
+}
+
+.track-show-header-info-text {
+  /* display: flex;
+  flex-direction: column;
+  background-color: red; */
+}
+
+.track-show-header-artist-container {
+  display: flex;
 }
 
 .track-show-header-artist {
   background-color: black;
   color: #fff;
+  font-size: 17px;
+  padding: 6px;
+  margin-bottom: 5px;
+  
 }
 
 .track-show-header-title {
   background-color: black;
   color: #fff;
+  font-size: 27px;
+  padding: 8px;
 }

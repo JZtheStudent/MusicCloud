@@ -1,11 +1,11 @@
 import React from 'react';
 import {withRouter} from 'react-router';
 import TrackShowHeaderContainer from './track_show_header_container';
-import FastAverageColor from 'fast-average-color';
+// import FastAverageColor from 'fast-average-color';
 
 class TrackShow extends React.Component {
   componentDidMount() {
-    const fac = new FastAverageColor();
+    // const fac = new FastAverageColor();
     const id = this.props.match.params.id;
     this.props.fetchTrack(id);
       // .then(() => {

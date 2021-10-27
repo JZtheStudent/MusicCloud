@@ -11,9 +11,11 @@ class TrackShowHeaderInfo extends React.Component {
     const {track} = this.props;
     return (  
       <div className="track-show-header-info">
-        <button className="track-show-play-pause"><BiPlay /></button>
-        <div>
-          <h1 className="track-show-header-artist">{track.artist}</h1>
+        <button className="track-show-play-pause-button"><BiPlay className="track-show-play"/></button>
+        <div className="track-show-header-info-text">
+          <div className="track-show-header-artist-container">
+            <h1 className="track-show-header-artist">{track.artist}</h1>
+          </div>
           <h1 className="track-show-header-title">{track.title}</h1>
         </div>
       </div>

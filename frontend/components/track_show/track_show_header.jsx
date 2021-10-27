@@ -1,6 +1,5 @@
 import React from 'react';
 import TrackShowHeaderInfo from './track_show_header_info';
-import FastAverageColor from 'fast-average-color';
 
 class TrackShowHeader extends React.Component {
 
