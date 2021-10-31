@@ -58,10 +58,9 @@
   font-size: 60px;
 }
 
-.track-show-header-info-text {
-  /* display: flex;
-  flex-direction: column;
-  background-color: red; */
+.track-show-pause {
+  position: relative;
+  font-size: 60px;
 }
 
 .track-show-header-artist-container {

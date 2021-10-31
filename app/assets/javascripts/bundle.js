@@ -41,29 +41,22 @@ var closeModal = function closeModal() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_CURRENT_TRACK": () => (/* binding */ RECEIVE_CURRENT_TRACK),
-/* harmony export */   "TOGGLE_PLAY": () => (/* binding */ TOGGLE_PLAY),
-/* harmony export */   "TOGGLE_PAUSE": () => (/* binding */ TOGGLE_PAUSE),
+/* harmony export */   "TOGGLE_PLAYER": () => (/* binding */ TOGGLE_PLAYER),
 /* harmony export */   "receiveCurrentTrack": () => (/* binding */ receiveCurrentTrack),
-/* harmony export */   "togglePlay": () => (/* binding */ togglePlay),
-/* harmony export */   "togglePause": () => (/* binding */ togglePause)
+/* harmony export */   "togglePlayer": () => (/* binding */ togglePlayer)
 /* harmony export */ });
 var RECEIVE_CURRENT_TRACK = 'RECEIVE_CURRENT_TRACK';
-var TOGGLE_PLAY = 'TOGGLE_PLAY';
-var TOGGLE_PAUSE = 'TOGGLE_PLAY';
+var TOGGLE_PLAYER = 'TOGGLE_PLAYER';
 var receiveCurrentTrack = function receiveCurrentTrack(currentTrack) {
   return {
     type: RECEIVE_CURRENT_TRACK,
     currentTrack: currentTrack
   };
 };
-var togglePlay = function togglePlay() {
+var togglePlayer = function togglePlayer(bool) {
   return {
-    type: TOGGLE_PLAY
-  };
-};
-var togglePause = function togglePause() {
-  return {
-    type: TOGGLE_PAUSE
+    type: TOGGLE_PLAYER,
+    bool: bool
   };
 };
 
@@ -419,11 +412,15 @@ var AudioPlayer = function AudioPlayer(props) {
   var animationRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(); // reference the animation
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    audioPlayer.current.volume = 0.3;
+    props.togglePlayer(isPlaying);
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setIsPlaying(props.isPlaying ? true : false);
+    audioPlayer.current.volume = 0.1;
     setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
     setTrackArtist(props.currentTrack ? props.currentTrack.artist.username : "");
-    setTrackAlbumArtUrl(props.currentTrack ? props.currentTrack.albumArt : "");
-    setIsPlaying(props.currentTrack ? audioPlayer.current.paused ? false : true : false);
+    setTrackAlbumArtUrl(props.currentTrack ? props.currentTrack.albumArt : ""); // setIsPlaying(props.currentTrack ? (audioPlayer.current.paused ? false : true) : false);
+
     animationRef.current = requestAnimationFrame(whilePlaying);
     var seconds = getDuration();
     setDuration(seconds);
@@ -439,10 +436,13 @@ var AudioPlayer = function AudioPlayer(props) {
   };
 
   var togglePlayPause = function togglePlayPause() {
+    if (!props.currentTrack) return;
     var seconds = getDuration();
     setDuration(seconds);
     var prevValue = isPlaying;
-    setIsPlaying(!prevValue);
+    setIsPlaying(!prevValue); //
+
+    props.togglePlayer(!prevValue); //
 
     if (!prevValue) {
       audioPlayer.current.play();
@@ -532,18 +532,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _audio_player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./audio_player */ "./frontend/components/audio_player/audio_player.jsx");
+/* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/player_actions */ "./frontend/actions/player_actions.js");
+
 
 
 
 var mapStateToProps = function mapStateToProps(_ref) {
   var player = _ref.player;
   return {
-    currentTrack: player.currentTrack
+    currentTrack: player.currentTrack,
+    isPlaying: player.isPlaying
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    togglePlayer: function togglePlayer(bool) {
+      return dispatch((0,_actions_player_actions__WEBPACK_IMPORTED_MODULE_2__.togglePlayer)(bool));
+    }
+  };
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_audio_player__WEBPACK_IMPORTED_MODULE_1__.AudioPlayer));
@@ -2545,7 +2552,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
- // import FastAverageColor from 'fast-average-color';
+
 
 var TrackShow = /*#__PURE__*/function (_React$Component) {
   _inherits(TrackShow, _React$Component);
@@ -2567,11 +2574,8 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
   _createClass(TrackShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // const fac = new FastAverageColor();
       var id = this.props.match.params.id;
-      this.props.fetchTrack(id); // .then(() => {
-      //   fac.getColorAsync(this.props.track.albumArt)
-      // })
+      this.props.fetchTrack(id);
     }
   }, {
     key: "render",
@@ -2645,7 +2649,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _track_show_header_info__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track_show_header_info */ "./frontend/components/track_show/track_show_header_info.jsx");
+/* harmony import */ var _track_show_header_info_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track_show_header_info_container */ "./frontend/components/track_show/track_show_header_info_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2699,7 +2703,7 @@ var TrackShowHeader = /*#__PURE__*/function (_React$Component) {
         style: {
           background: "linear-gradient(45deg, #A6B7DB, ".concat(avgColor, " )")
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_track_show_header_info__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_track_show_header_info_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         track: track
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "track-show-image-container"
@@ -2730,6 +2734,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _track_show_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track_show_header */ "./frontend/components/track_show/track_show_header.jsx");
+/* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/player_actions */ "./frontend/actions/player_actions.js");
+
 
 
 
@@ -2738,7 +2744,11 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    receiveCurrentTrack: function receiveCurrentTrack(track) {
+      return dispatch((0,_actions_player_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentTrack)(track));
+    }
+  };
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_track_show_header__WEBPACK_IMPORTED_MODULE_1__["default"]));
@@ -2780,6 +2790,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2795,21 +2807,66 @@ var TrackShowHeaderInfo = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, TrackShowHeaderInfo);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "trackShowPlayPauseButton", function () {
+      if (_this.props.isPlaying) {
+        if (_this.props.currentTrack.id === _this.props.track.id) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_1__.BiPause, {
+            className: "track-show-pause"
+          });
+        } else {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_1__.BiPlay, {
+            className: "track-show-play"
+          });
+        }
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_1__.BiPlay, {
+          className: "track-show-play"
+        });
+      }
+    });
+
     _this.state = {};
+    _this.handleClicked = _this.handleClicked.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(TrackShowHeaderInfo, [{
+    key: "handleClicked",
+    value: function handleClicked() {
+      if (this.props.isPlaying) {
+        if (this.props.currentTrack.id === this.props.track.id) {
+          this.props.togglePlayer(false);
+        } else {
+          this.props.receiveCurrentTrack(this.props.track);
+        }
+      } else {
+        if (!this.props.currentTrack || this.props.currentTrack.id !== this.props.track.id) {
+          this.props.receiveCurrentTrack(this.props.track);
+        } else {
+          this.props.togglePlayer(true);
+        }
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var track = this.props.track;
+      console.log("Track: ".concat(track.id));
+
+      if (this.props.currentTrack) {
+        console.log("Track Playing: ".concat(this.props.currentTrack.id));
+      } else {
+        console.log("Track Playing: undefined");
+      }
+
+      console.log(this.props.isPlaying);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "track-show-header-info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "track-show-play-pause-button"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_1__.BiPlay, {
-        className: "track-show-play"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "track-show-play-pause-button",
+        onClick: this.handleClicked
+      }, this.trackShowPlayPauseButton()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "track-show-header-info-text"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "track-show-header-artist-container"
@@ -2825,6 +2882,47 @@ var TrackShowHeaderInfo = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TrackShowHeaderInfo);
+
+/***/ }),
+
+/***/ "./frontend/components/track_show/track_show_header_info_container.js":
+/*!****************************************************************************!*\
+  !*** ./frontend/components/track_show/track_show_header_info_container.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_player_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/player_actions */ "./frontend/actions/player_actions.js");
+/* harmony import */ var _track_show_header_info__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./track_show_header_info */ "./frontend/components/track_show/track_show_header_info.jsx");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    isPlaying: state.player.isPlaying,
+    currentTrack: state.player.currentTrack
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    receiveCurrentTrack: function receiveCurrentTrack(track) {
+      return dispatch((0,_actions_player_actions__WEBPACK_IMPORTED_MODULE_1__.receiveCurrentTrack)(track));
+    },
+    togglePlayer: function togglePlayer(bool) {
+      return dispatch((0,_actions_player_actions__WEBPACK_IMPORTED_MODULE_1__.togglePlayer)(bool));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_track_show_header_info__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -3213,6 +3311,7 @@ var playerReducer = function playerReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
+  var newState = Object.assign({}, state);
 
   switch (action.type) {
     case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_TRACK:
@@ -3220,15 +3319,9 @@ var playerReducer = function playerReducer() {
         currentTrack: action.currentTrack
       });
 
-    case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__.TOGGLE_PLAY:
-      return Object.assign({}, {
-        isPlaying: true
-      });
-
-    case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__.TOGGLE_PAUSE:
-      return Object.assign({}, {
-        isPlaying: false
-      });
+    case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__.TOGGLE_PLAYER:
+      newState['isPlaying'] = action.bool;
+      return newState;
 
     default:
       return state;

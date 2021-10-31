@@ -21,17 +21,23 @@ const AudioPlayer = (props) => {
   const progressBar = useRef(); // reference our progress bar
   const animationRef = useRef(); // reference the animation
   
-useEffect(() => {
-  audioPlayer.current.volume = 0.3;
-  setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
-  setTrackArtist(props.currentTrack ? props.currentTrack.artist.username : "")
-  setTrackAlbumArtUrl(props.currentTrack ? props.currentTrack.albumArt : "") 
-  setIsPlaying(props.currentTrack ? (audioPlayer.current.paused ? false : true) : false);
-  animationRef.current = requestAnimationFrame(whilePlaying);
-  const seconds = getDuration();
-  setDuration(seconds);
-  progressBar.current.max = seconds;
-}, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
+  useEffect(() => {
+    props.togglePlayer(isPlaying);
+  }, []);
+
+  useEffect(() => {
+    setIsPlaying(props.isPlaying ? true : false);
+    audioPlayer.current.volume = 0.1;
+    setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
+    setTrackArtist(props.currentTrack ? props.currentTrack.artist.username : "")
+    setTrackAlbumArtUrl(props.currentTrack ? props.currentTrack.albumArt : "") 
+    // setIsPlaying(props.currentTrack ? (audioPlayer.current.paused ? false : true) : false);
+    
+    animationRef.current = requestAnimationFrame(whilePlaying);
+    const seconds = getDuration();
+    setDuration(seconds);
+    progressBar.current.max = seconds;
+  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
   
   const calculateTime = (secs) => {
     const minutes = Math.floor( secs/60 ) 
@@ -42,12 +48,16 @@ useEffect(() => {
   }
   
   const togglePlayPause = () => {
-    
+    if (!props.currentTrack) return;
+
     const seconds = getDuration();
     setDuration(seconds);
 
     const prevValue = isPlaying;
     setIsPlaying(!prevValue);
+    //
+    props.togglePlayer(!prevValue);
+    //
     if (!prevValue) {
       audioPlayer.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
