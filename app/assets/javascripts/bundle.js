@@ -41,13 +41,29 @@ var closeModal = function closeModal() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_CURRENT_TRACK": () => (/* binding */ RECEIVE_CURRENT_TRACK),
-/* harmony export */   "receiveCurrentTrack": () => (/* binding */ receiveCurrentTrack)
+/* harmony export */   "TOGGLE_PLAY": () => (/* binding */ TOGGLE_PLAY),
+/* harmony export */   "TOGGLE_PAUSE": () => (/* binding */ TOGGLE_PAUSE),
+/* harmony export */   "receiveCurrentTrack": () => (/* binding */ receiveCurrentTrack),
+/* harmony export */   "togglePlay": () => (/* binding */ togglePlay),
+/* harmony export */   "togglePause": () => (/* binding */ togglePause)
 /* harmony export */ });
 var RECEIVE_CURRENT_TRACK = 'RECEIVE_CURRENT_TRACK';
+var TOGGLE_PLAY = 'TOGGLE_PLAY';
+var TOGGLE_PAUSE = 'TOGGLE_PLAY';
 var receiveCurrentTrack = function receiveCurrentTrack(currentTrack) {
   return {
     type: RECEIVE_CURRENT_TRACK,
     currentTrack: currentTrack
+  };
+};
+var togglePlay = function togglePlay() {
+  return {
+    type: TOGGLE_PLAY
+  };
+};
+var togglePause = function togglePause() {
+  return {
+    type: TOGGLE_PAUSE
   };
 };
 
@@ -3202,6 +3218,16 @@ var playerReducer = function playerReducer() {
     case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_TRACK:
       return Object.assign({}, {
         currentTrack: action.currentTrack
+      });
+
+    case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__.TOGGLE_PLAY:
+      return Object.assign({}, {
+        isPlaying: true
+      });
+
+    case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__.TOGGLE_PAUSE:
+      return Object.assign({}, {
+        isPlaying: false
       });
 
     default:
