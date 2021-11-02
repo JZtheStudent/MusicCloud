@@ -24,9 +24,15 @@ const AudioPlayer = (props) => {
   useEffect(() => {
     props.togglePlayer(isPlaying);
   }, []);
+  
+  useEffect(() => {
+    togglePlayPause();
+  }, [props.isPlaying])
+  
+
 
   useEffect(() => {
-    setIsPlaying(props.isPlaying ? true : false);
+    setIsPlaying(props.isPlaying);
     audioPlayer.current.volume = 0.1;
     setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
     setTrackArtist(props.currentTrack ? props.currentTrack.artist.username : "")

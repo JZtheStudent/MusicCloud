@@ -7,7 +7,9 @@ const playerReducer = (state={}, action) => {
   const newState = Object.assign({}, state)
   switch(action.type) {
     case RECEIVE_CURRENT_TRACK:
-      return Object.assign({}, {currentTrack: action.currentTrack});
+      newState['currentTrack'] = action.currentTrack;
+      return newState;
+      // return Object.assign({}, {currentTrack: action.currentTrack});
     case TOGGLE_PLAYER:
       newState['isPlaying'] = action.bool;
       return newState;

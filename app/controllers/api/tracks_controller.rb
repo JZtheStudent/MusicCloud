@@ -35,7 +35,7 @@ class Api::TracksController < ApplicationController
       render json: @track.errors.full_messages, status: 401
     end
   end
-
+  
   private
   def track_params 
     params.require(:track).permit(:title, :artist_id, :album_art, :music_file)

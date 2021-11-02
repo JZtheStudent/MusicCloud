@@ -196,7 +196,6 @@ var updateTrack = function updateTrack(data, userId, trackId) {
 };
 var deleteTrack = function deleteTrack(userId, trackId) {
   return function (dispatch) {
-    console.log('in delete action');
     return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteTrack(trackId).then(function () {
       return dispatch((0,_users_actions__WEBPACK_IMPORTED_MODULE_1__.fetchUserTracks)(userId));
     });
@@ -415,7 +414,10 @@ var AudioPlayer = function AudioPlayer(props) {
     props.togglePlayer(isPlaying);
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    setIsPlaying(props.isPlaying ? true : false);
+    togglePlayPause();
+  }, [props.isPlaying]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setIsPlaying(props.isPlaying);
     audioPlayer.current.volume = 0.1;
     setTrackTitle(props.currentTrack ? props.currentTrack.title : "No song playing");
     setTrackArtist(props.currentTrack ? props.currentTrack.artist.username : "");
@@ -1813,6 +1815,13 @@ var ProfileTracks = /*#__PURE__*/function (_React$Component) {
       this.props.fetchUser(this.props.currentUser.id);
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.userTracks.length !== prevProps.userTracks.length) {
+        this.props.fetchUserTracks(this.props.currentUser.id);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2399,7 +2408,11 @@ var TrackDelete = function TrackDelete(props) {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    props.deleteTrack(artistId, trackId).then(props.history.push('/profile')).then(window.location.reload());
+    props.deleteTrack(artistId, trackId).then(function () {
+      props.history.push('/profile');
+    }).then(function () {
+      window.location.reload();
+    });
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2449,18 +2462,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _track_delete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track_delete */ "./frontend/components/track_delete/track_delete.jsx");
 /* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
 
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {};
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var entities = _ref.entities;
+  return {
+    userTracks: Object.values(entities.userTracks)
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     deleteTrack: function deleteTrack(userId, trackId) {
       return dispatch((0,_actions_track_actions__WEBPACK_IMPORTED_MODULE_2__.deleteTrack)(userId, trackId));
+    },
+    fetchUserTracks: function fetchUserTracks(userId) {
+      return dispatch((0,_actions_users_actions__WEBPACK_IMPORTED_MODULE_3__.fetchUserTracks)(userId));
     }
   };
 };
@@ -2839,10 +2860,13 @@ var TrackShowHeaderInfo = /*#__PURE__*/function (_React$Component) {
           this.props.togglePlayer(false);
         } else {
           this.props.receiveCurrentTrack(this.props.track);
+          this.props.togglePlayer(true);
         }
       } else {
+        // there's no track or the current track is not this track
         if (!this.props.currentTrack || this.props.currentTrack.id !== this.props.track.id) {
           this.props.receiveCurrentTrack(this.props.track);
+          this.props.togglePlayer(true);
         } else {
           this.props.togglePlayer(true);
         }
@@ -2860,7 +2884,7 @@ var TrackShowHeaderInfo = /*#__PURE__*/function (_React$Component) {
         console.log("Track Playing: undefined");
       }
 
-      console.log(this.props.isPlaying);
+      console.log("Is Playing: ".concat(this.props.isPlaying));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "track-show-header-info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -3315,9 +3339,9 @@ var playerReducer = function playerReducer() {
 
   switch (action.type) {
     case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_TRACK:
-      return Object.assign({}, {
-        currentTrack: action.currentTrack
-      });
+      newState['currentTrack'] = action.currentTrack;
+      return newState;
+    // return Object.assign({}, {currentTrack: action.currentTrack});
 
     case _actions_player_actions__WEBPACK_IMPORTED_MODULE_0__.TOGGLE_PLAYER:
       newState['isPlaying'] = action.bool;

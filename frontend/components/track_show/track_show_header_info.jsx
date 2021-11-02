@@ -33,10 +33,13 @@ class TrackShowHeaderInfo extends React.Component {
         this.props.togglePlayer(false);
       } else {
         this.props.receiveCurrentTrack(this.props.track);
+        this.props.togglePlayer(true);
       }
     } else {
-      if (!this.props.currentTrack || this.props.currentTrack.id !== this.props.track.id) {
+      // there's no track or the current track is not this track
+      if (!this.props.currentTrack || (this.props.currentTrack.id !== this.props.track.id)) {
         this.props.receiveCurrentTrack(this.props.track);
+        this.props.togglePlayer(true);
       } else {
         this.props.togglePlayer(true);
       }
@@ -52,7 +55,7 @@ class TrackShowHeaderInfo extends React.Component {
     } else {
       console.log(`Track Playing: undefined`)
     }
-    console.log(this.props.isPlaying);
+    console.log(`Is Playing: ${this.props.isPlaying}`);
     return (  
       <div className="track-show-header-info">
         <button className="track-show-play-pause-button" onClick={this.handleClicked}>{this.trackShowPlayPauseButton()}</button>
