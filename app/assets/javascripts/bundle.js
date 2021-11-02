@@ -415,7 +415,7 @@ var AudioPlayer = function AudioPlayer(props) {
     props.togglePlayer(isPlaying);
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    togglePlayPause();
+    togglePlayPause(props.isPlaying);
   }, [props.isPlaying]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsPlaying(props.isPlaying);
@@ -438,16 +438,14 @@ var AudioPlayer = function AudioPlayer(props) {
     return "".concat(returnedMinutes, ":").concat(returnedSeconds);
   };
 
-  var togglePlayPause = function togglePlayPause() {
+  var togglePlayPause = function togglePlayPause(val) {
     if (!props.currentTrack) return;
     var seconds = getDuration();
     setDuration(seconds);
-    var prevValue = isPlaying;
-    setIsPlaying(!prevValue); //
+    setIsPlaying(val);
+    props.togglePlayer(val);
 
-    props.togglePlayer(!prevValue); //
-
-    if (!prevValue) {
+    if (val) {
       audioPlayer.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
     } else {
@@ -496,7 +494,9 @@ var AudioPlayer = function AudioPlayer(props) {
     className: "forward-backward"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_2__.BiSkipPrevious, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "play-pause",
-    onClick: togglePlayPause
+    onClick: function onClick() {
+      return isPlaying ? togglePlayPause(false) : togglePlayPause(true);
+    }
   }, isPlaying ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_2__.BiPause, null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_2__.BiPlay, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "forward-backward"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_2__.BiSkipNext, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

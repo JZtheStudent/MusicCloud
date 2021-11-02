@@ -26,10 +26,10 @@ const AudioPlayer = (props) => {
   }, []);
   
   useEffect(() => {
-    togglePlayPause();
+    togglePlayPause(props.isPlaying);
   }, [props.isPlaying])
   
-
+  
   
   useEffect(() => {
     setIsPlaying(props.isPlaying);
@@ -53,18 +53,16 @@ const AudioPlayer = (props) => {
     return `${returnedMinutes}:${returnedSeconds}`
   }
   
-  const togglePlayPause = () => {
+  const togglePlayPause = (val) => {
     if (!props.currentTrack) return;
 
     const seconds = getDuration();
     setDuration(seconds);
-
-    const prevValue = isPlaying;
-    setIsPlaying(!prevValue);
-    //
-    props.togglePlayer(!prevValue);
-    //
-    if (!prevValue) {
+    setIsPlaying(val);
+    
+    props.togglePlayer(val);
+    
+    if (val) {
       audioPlayer.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
     } else {
@@ -111,7 +109,7 @@ const AudioPlayer = (props) => {
         
         
         <button className="forward-backward"><BiSkipPrevious/></button>
-        <button className="play-pause" onClick={togglePlayPause} >
+        <button className="play-pause" onClick={() => isPlaying ? togglePlayPause(false) : togglePlayPause(true)} >
           {isPlaying ? <BiPause /> : <BiPlay />}
         </button>
         <button className="forward-backward"><BiSkipNext/></button>
