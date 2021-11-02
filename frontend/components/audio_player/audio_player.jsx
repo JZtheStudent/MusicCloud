@@ -30,7 +30,7 @@ const AudioPlayer = (props) => {
   }, [props.isPlaying])
   
 
-
+  
   useEffect(() => {
     setIsPlaying(props.isPlaying);
     audioPlayer.current.volume = 0.1;

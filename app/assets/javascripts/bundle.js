@@ -196,6 +196,7 @@ var updateTrack = function updateTrack(data, userId, trackId) {
 };
 var deleteTrack = function deleteTrack(userId, trackId) {
   return function (dispatch) {
+    console.log('delete track');
     return _util_track_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteTrack(trackId).then(function () {
       return dispatch((0,_users_actions__WEBPACK_IMPORTED_MODULE_1__.fetchUserTracks)(userId));
     });
@@ -1815,13 +1816,6 @@ var ProfileTracks = /*#__PURE__*/function (_React$Component) {
       this.props.fetchUser(this.props.currentUser.id);
     }
   }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      if (this.props.userTracks.length !== prevProps.userTracks.length) {
-        this.props.fetchUserTracks(this.props.currentUser.id);
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2410,9 +2404,8 @@ var TrackDelete = function TrackDelete(props) {
     e.preventDefault();
     props.deleteTrack(artistId, trackId).then(function () {
       props.history.push('/profile');
-    }).then(function () {
-      window.location.reload();
-    });
+    }); // .then(() => {
+    //   window.location.reload()});
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2875,13 +2868,10 @@ var TrackShowHeaderInfo = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var track = this.props.track;
-      console.log("Track: ".concat(track.id));
+      var track = this.props.track; // console.log(`Track: ${track.id}`);
 
-      if (this.props.currentTrack) {
-        console.log("Track Playing: ".concat(this.props.currentTrack.id));
-      } else {
-        console.log("Track Playing: undefined");
+      if (this.props.currentTrack) {// console.log(`Track Playing: ${this.props.currentTrack.id}`);
+      } else {// console.log(`Track Playing: undefined`)
       }
 
       console.log("Is Playing: ".concat(this.props.isPlaying));
@@ -3574,7 +3564,7 @@ var userTracksReducer = function userTracksReducer() {
 
   switch (action.type) {
     case _actions_users_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_USER_TRACKS:
-      return Object.assign({}, state, action.userTracks);
+      return action.userTracks;
 
     default:
       return state;

@@ -11,18 +11,11 @@ class ProfileTracks extends React.Component {
     this.props.fetchUser(this.props.currentUser.id);
   }
   
-  componentDidUpdate(prevProps) {
-    if (this.props.userTracks.length !== prevProps.userTracks.length) {
-      this.props.fetchUserTracks(this.props.currentUser.id);
-    }
-  }
-  
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = { }
   }
   render() { 
-    
     return (  
       <div className="profile-page-container">
         <ProfileHeaderContainer currentUser={this.props.currentUser}/>

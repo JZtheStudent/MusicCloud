@@ -28,7 +28,7 @@ class Api::UsersController < ApplicationController
     end
     
   end
-
+  
   def tracks 
     @user = User.find_by(id: params[:id])
     if @user 

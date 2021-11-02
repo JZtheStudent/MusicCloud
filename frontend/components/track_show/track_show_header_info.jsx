@@ -49,11 +49,11 @@ class TrackShowHeaderInfo extends React.Component {
 
   render() { 
     const {track} = this.props;
-    console.log(`Track: ${track.id}`);
+    // console.log(`Track: ${track.id}`);
     if (this.props.currentTrack) {
-      console.log(`Track Playing: ${this.props.currentTrack.id}`);
+      // console.log(`Track Playing: ${this.props.currentTrack.id}`);
     } else {
-      console.log(`Track Playing: undefined`)
+      // console.log(`Track Playing: undefined`)
     }
     console.log(`Is Playing: ${this.props.isPlaying}`);
     return (  

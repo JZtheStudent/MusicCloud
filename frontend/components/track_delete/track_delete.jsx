@@ -38,8 +38,8 @@ const TrackDelete = (props) => {
     props.deleteTrack(artistId, trackId)
       .then(() => {   
         props.history.push('/profile')})
-      .then(() => {
-        window.location.reload()});
+      // .then(() => {
+      //   window.location.reload()});
   }
   
   return (  
