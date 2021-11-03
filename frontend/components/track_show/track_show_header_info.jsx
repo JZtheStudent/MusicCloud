@@ -49,13 +49,7 @@ class TrackShowHeaderInfo extends React.Component {
 
   render() { 
     const {track} = this.props;
-    // console.log(`Track: ${track.id}`);
-    if (this.props.currentTrack) {
-      // console.log(`Track Playing: ${this.props.currentTrack.id}`);
-    } else {
-      // console.log(`Track Playing: undefined`)
-    }
-    console.log(`Is Playing: ${this.props.isPlaying}`);
+
     return (  
       <div className="track-show-header-info">
         <button className="track-show-play-pause-button" onClick={this.handleClicked}>{this.trackShowPlayPauseButton()}</button>

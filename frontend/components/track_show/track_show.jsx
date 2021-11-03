@@ -1,12 +1,13 @@
 import React from 'react';
 import {withRouter} from 'react-router';
 import TrackShowHeaderContainer from './track_show_header_container';
-
+import TrackShowCommentFormContainer from './track_show_comment_form_container';
 
 class TrackShow extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.fetchTrack(id);
+    this.props.fetchUser(this.props.currentUser.id);
   }
   
   constructor(props) {
@@ -20,10 +21,14 @@ class TrackShow extends React.Component {
   render() { 
     const {track, currentUser} = this.props;
     if (!track) return null;
-    
+    console.log(currentUser);
     return ( 
       <div>
         <TrackShowHeaderContainer track={track} avgColor={this.state.avgColor}/>
+        <TrackShowCommentFormContainer currentUser={currentUser}/>
+        <div className='track-show-bottom-section'>
+          
+        </div>
       </div> 
       
     );

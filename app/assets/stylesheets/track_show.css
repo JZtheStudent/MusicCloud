@@ -82,3 +82,47 @@
   font-size: 27px;
   padding: 8px;
 }
+
+.track-show-comment-form-container {
+  margin-top: 20px;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.track-show-comment-form {
+  display: flex;
+  align-items: center;
+}
+
+.track-show-comment-form > img {
+  width: 40px;
+  height: 40px;
+}
+
+.track-show-comment-input-container {
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  /* max-width: 765px; */
+}
+
+.track-show-comment-input {
+  width: 765px;
+  height: 20px;
+  margin: 0 5px;;
+}
+
+.track-show-bottom-section {
+  margin-left: 25px;
+  margin-top: 10px;
+  display: flex;
+}
+
+.track-show-artist-image-container {
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+}
