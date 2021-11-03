@@ -22,6 +22,14 @@ class User < ApplicationRecord
     foreign_key: :artist_id,
     class_name: :Track
   
+  has_many :comments,
+    primary_key: :id,
+    foreign_key: :commenter_id,
+    class_name: :Comment
+
+  has_many :commented_tracks,
+    through: :comments,
+    source: :track 
   
   attr_reader :password
   

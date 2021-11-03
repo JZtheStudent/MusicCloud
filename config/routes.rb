@@ -7,8 +7,11 @@ Rails.application.routes.draw do
       resources :tracks, only: [:update, ]
     end
     resource :session, only: [:create, :destroy]
-    resources :tracks, only: [:index, :show, :create, :destroy]
-
+    resources :tracks, only: [:index, :show, :create, :destroy] do 
+      resources :comments, only: [:index]
+    end
+    resources :comments, only: [:create, :destroy]
+    
     get "/users/:id/tracks", to: 'users#tracks'
   end
   

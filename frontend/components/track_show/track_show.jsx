@@ -34,7 +34,7 @@ class TrackShow extends React.Component {
         {
           currentUser ? <TrackShowCommentFormContainer currentUser={currentUser} /> : <div></div>
         }
-        {/* <TrackShowCommentFormContainer currentUser={currentUser}/> */}
+
         <div className='track-show-bottom-section'>
           <div className='track-show-artist-section'>
             <div className="track-show-artist-image-container">
