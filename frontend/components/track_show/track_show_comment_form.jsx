@@ -9,11 +9,17 @@ const TrackShowCommentForm = (props) => {
       setInput(e.currentTarget.value);
     }
   }
+  
+  const displayCurrentUserImage = () => (
+    (!props.currentUser) ?
+      <div className="track-show-comment-form-image"></div> :
+      <img className="track-show-comment-form-image" src={props.currentUser.profilePhoto}/>
+  )
 
   return (  
     <div className='track-show-comment-form-container'>
       <div className='track-show-comment-form'>
-        <img src={props.currentUser.profilePhoto}/>
+        {displayCurrentUserImage()}
         <div className="track-show-comment-input-container">
           <input 
             type="text"

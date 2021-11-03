@@ -95,7 +95,7 @@
   align-items: center;
 }
 
-.track-show-comment-form > img {
+.track-show-comment-form-image  {
   width: 40px;
   height: 40px;
 }
@@ -115,6 +115,7 @@
 }
 
 .track-show-bottom-section {
+  margin-top: 25px;
   margin-left: 25px;
   display: flex;
 }

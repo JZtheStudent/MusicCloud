@@ -8,7 +8,7 @@ class TrackShow extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.fetchTrack(id);
-    this.props.fetchUser(this.props.currentUser.id);
+    if (this.props.currentUser) this.props.fetchUser(this.props.currentUser.id);
   }
   
   constructor(props) {
@@ -31,7 +31,10 @@ class TrackShow extends React.Component {
     return ( 
       <div>
         <TrackShowHeaderContainer track={track} avgColor={this.state.avgColor}/>
-        <TrackShowCommentFormContainer currentUser={currentUser}/>
+        {
+          currentUser ? <TrackShowCommentFormContainer currentUser={currentUser} /> : <div></div>
+        }
+        {/* <TrackShowCommentFormContainer currentUser={currentUser}/> */}
         <div className='track-show-bottom-section'>
           <div className='track-show-artist-section'>
             <div className="track-show-artist-image-container">
