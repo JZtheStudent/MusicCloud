@@ -2,12 +2,14 @@ import React from 'react';
 import {withRouter} from 'react-router';
 import TrackShowHeaderContainer from './track_show_header_container';
 import TrackShowCommentFormContainer from './track_show_comment_form_container';
+import TrackShowCommentContainer from './track_show_comment_container';
 import {FaComment} from 'react-icons/fa';
 
 class TrackShow extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.fetchTrack(id);
+    this.props.fetchComments(id);
     if (this.props.currentUser) this.props.fetchUser(this.props.currentUser.id);
   }
   
@@ -27,12 +29,11 @@ class TrackShow extends React.Component {
   render() { 
     const {track, currentUser} = this.props;
     if (!track) return null;
-    console.log(currentUser);
     return ( 
       <div>
         <TrackShowHeaderContainer track={track} avgColor={this.state.avgColor}/>
         {
-          currentUser ? <TrackShowCommentFormContainer currentUser={currentUser} /> : <div></div>
+          currentUser ? <TrackShowCommentFormContainer track={track} currentUser={currentUser} /> : <div></div>
         }
 
         <div className='track-show-bottom-section'>
@@ -45,6 +46,11 @@ class TrackShow extends React.Component {
           
           <div className="track-show-comments-section">
             <h1><FaComment />&nbsp; 0 Comments</h1>
+            {
+              this.props.comments.map((comment, idx) => (
+                <TrackShowCommentContainer comment={comment} key={idx}/>
+              ))
+            }
           </div>
           
           

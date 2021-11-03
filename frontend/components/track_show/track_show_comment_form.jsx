@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 const TrackShowCommentForm = (props) => {
   
@@ -10,6 +10,22 @@ const TrackShowCommentForm = (props) => {
     }
   }
   
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(input);
+    // console.log(props.track.id);
+    // console.log(props.currentUser.id);
+    props.createComment({
+      commenter_id: props.currentUser.id,
+      track_id: props.track.id,
+      body: input
+    });
+    setInput('');
+  }
+  
+
+  
+  
   const displayCurrentUserImage = () => (
     (!props.currentUser) ?
       <div className="track-show-comment-form-image"></div> :
@@ -18,17 +34,22 @@ const TrackShowCommentForm = (props) => {
 
   return (  
     <div className='track-show-comment-form-container'>
-      <div className='track-show-comment-form'>
+      <div className='track-show-comment-form-section'>
         {displayCurrentUserImage()}
-        <div className="track-show-comment-input-container">
-          <input 
-            type="text"
-            value={input}
-            onChange={inputChanged()}
-            placeholder="Write a comment"
-            className="track-show-comment-input"
-          />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="track-show-comment-input-container">
+            <input 
+              type="text"
+              value={input}
+              onChange={inputChanged()}
+              placeholder="Write a comment"
+              className="track-show-comment-input"
+            />
+            <button className="track-show-form-submit-button" type="submit">Add Comment</button>
+          </div>
+          
+        </form>
+        
         
       </div>
     </div>

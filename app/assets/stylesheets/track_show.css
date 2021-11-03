@@ -90,9 +90,23 @@
   display: flex;
 }
 
-.track-show-comment-form {
+.track-show-comment-form-section {
   display: flex;
   align-items: center;
+}
+
+.track-show-comment-form-section > form {
+  display: flex;
+
+}
+
+.track-show-form-submit-button {
+  margin-right: 5px;
+  background-color: #f50;
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
 }
 
 .track-show-comment-form-image  {

@@ -10,7 +10,7 @@
 #  updated_at   :datetime         not null
 #
 class Comment < ApplicationRecord
-  validates :commenter_id, uniqueness: {scope: :track_id}
+  # validates :commenter_id, uniqueness: {scope: :track_id}
 
   belongs_to :commenter,
     primary_key: :id,

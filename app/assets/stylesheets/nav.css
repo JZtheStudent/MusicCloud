@@ -114,3 +114,9 @@
 .social-logo:hover {
   opacity: 100%;
 }
+
+@media only screen and (max-width: 1475px) {
+  .my-links {
+    display: none;
+  }
+}
