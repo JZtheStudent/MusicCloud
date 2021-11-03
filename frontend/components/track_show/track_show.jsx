@@ -2,6 +2,7 @@ import React from 'react';
 import {withRouter} from 'react-router';
 import TrackShowHeaderContainer from './track_show_header_container';
 import TrackShowCommentFormContainer from './track_show_comment_form_container';
+import {FaComment} from 'react-icons/fa';
 
 class TrackShow extends React.Component {
   componentDidMount() {
@@ -37,6 +38,10 @@ class TrackShow extends React.Component {
               {this.displayArtistImage()}
             </div>
             <h1>{track.artist}</h1>
+          </div>
+          
+          <div className="track-show-comments-section">
+            <h1><FaComment />&nbsp; 0 Comments</h1>
           </div>
           
           

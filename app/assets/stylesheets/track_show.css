@@ -141,3 +141,14 @@
   height: 100%;
   border-radius: 50%;
 }
+
+.track-show-comments-section {
+  margin-left: 40px;
+}
+
+.track-show-comments-section > h1 {
+  color: gray;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
