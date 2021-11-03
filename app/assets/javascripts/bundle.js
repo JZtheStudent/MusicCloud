@@ -2565,6 +2565,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2581,6 +2583,14 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, TrackShow);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "displayArtistImage", function () {
+      return _this.props.track.artistImage === "" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        className: "track-show-artist-image",
+        src: _this.props.track.artistImage
+      });
+    });
+
     _this.state = {
       avgColor: "#E6846E"
     };
@@ -2609,7 +2619,11 @@ var TrackShow = /*#__PURE__*/function (_React$Component) {
         currentUser: currentUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "track-show-bottom-section"
-      }));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "track-show-artist-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "track-show-artist-image-container"
+      }, this.displayArtistImage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, track.artist))));
     }
   }]);
 

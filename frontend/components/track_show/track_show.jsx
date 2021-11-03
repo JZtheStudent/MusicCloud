@@ -17,6 +17,11 @@ class TrackShow extends React.Component {
     }
   }
   
+  displayArtistImage = () => (
+    (this.props.track.artistImage === "") ?
+      <div></div> :
+      <img className="track-show-artist-image" src={this.props.track.artistImage}/>
+  )
   
   render() { 
     const {track, currentUser} = this.props;
@@ -27,6 +32,13 @@ class TrackShow extends React.Component {
         <TrackShowHeaderContainer track={track} avgColor={this.state.avgColor}/>
         <TrackShowCommentFormContainer currentUser={currentUser}/>
         <div className='track-show-bottom-section'>
+          <div className='track-show-artist-section'>
+            <div className="track-show-artist-image-container">
+              {this.displayArtistImage()}
+            </div>
+            <h1>{track.artist}</h1>
+          </div>
+          
           
         </div>
       </div> 
