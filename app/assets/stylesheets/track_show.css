@@ -132,6 +132,7 @@
   margin-top: 25px;
   margin-left: 25px;
   display: flex;
+  align-items: flex-start;
 }
 
 .track-show-artist-section {
@@ -159,6 +160,7 @@
 
 .track-show-comments-section {
   margin-left: 40px;
+  margin-bottom: 200px;
 }
 
 .track-show-comments-section > h1 {
@@ -167,3 +169,4 @@
   display: flex;
   align-items: center;
 }
+

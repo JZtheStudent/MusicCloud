@@ -27,7 +27,7 @@ class TrackShow extends React.Component {
   )
   
   render() { 
-    const {track, currentUser} = this.props;
+    const {track, currentUser, comments} = this.props;
     if (!track) return null;
     return ( 
       <div>
@@ -45,10 +45,10 @@ class TrackShow extends React.Component {
           </div>
           
           <div className="track-show-comments-section">
-            <h1><FaComment />&nbsp; 0 Comments</h1>
+            <h1><FaComment />&nbsp; {comments.length} {comments.length === 1 ? 'Comment' : 'Comments'}</h1>
             {
-              this.props.comments.map((comment, idx) => (
-                <TrackShowCommentContainer comment={comment} key={idx}/>
+              comments.map((comment, idx) => (
+                <TrackShowCommentContainer currentUser={currentUser} comment={comment} key={idx}/>
               ))
             }
           </div>

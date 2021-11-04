@@ -1,0 +1,40 @@
+.comment {
+  margin-top: 10px;
+}
+
+.comment-box {
+  display: flex;
+}
+
+.comment-box > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  
+}
+
+.comment-right {
+  width: 500px;
+  font-size: 13px;
+  color: gray;
+}
+
+.comment-right-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.comment-right-bottom {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+}
+
+.comment-right-bottom > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
