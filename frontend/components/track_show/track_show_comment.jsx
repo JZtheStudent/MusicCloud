@@ -1,12 +1,11 @@
 import React from 'react';
 import {RiDeleteBin5Line} from 'react-icons/ri';
 
-const TrackShowComment = ({comment, currentUser}) => {
+const TrackShowComment = ({comment, currentUser, deleteComment}) => {
   
   const handleDelete = (e) => {
     e.preventDefault();
-    console.log('in handle click');
-    props.deleteComment(comment.id, comment.track_id);
+    deleteComment(comment.id, comment.track_id);
   }
   
   return (  

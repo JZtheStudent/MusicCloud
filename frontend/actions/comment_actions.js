@@ -18,9 +18,7 @@ export const createComment = (comment) => dispatch => (
     .then(() => dispatch(fetchComments(comment.track_id)))
 );
 
-export const deleteComment = (commentId, trackId) => dispatch => {
-  console.log('in delete action');
-
-  return CommentApiUtil.deleteComment(commentId)
+export const deleteComment = (commentId, trackId) => dispatch => (
+  CommentApiUtil.deleteComment(commentId)
     .then(() => dispatch(fetchComments(trackId)))
-};
+);

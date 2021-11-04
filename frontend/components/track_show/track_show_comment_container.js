@@ -7,10 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteComment: (commentId, trackId) => {
-    console.log('in comment container')
-    return dispatch(deleteComment(commentId, trackId))
-  }
+  deleteComment: (commentId, trackId) => dispatch(deleteComment(commentId, trackId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackShowComment);
