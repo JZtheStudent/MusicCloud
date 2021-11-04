@@ -31,6 +31,15 @@ class User < ApplicationRecord
     through: :comments,
     source: :track 
   
+  has_many :likes,
+    primary_key: :id,
+    foreign_key: :liker_id,
+    class_name: :Like 
+
+  has_many :liked_tracks,
+    through: :likes,
+    source: :track
+  
   attr_reader :password
   
   after_initialize :ensure_session_token

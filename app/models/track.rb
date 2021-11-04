@@ -41,4 +41,13 @@ class Track < ApplicationRecord
     through: :comments,
     source: :commenter
 
+  has_many :likes,
+    primary_key: :id,
+    foreign_key: :track_id,
+    class_name: :Like 
+
+  has_many :likers,
+    through: :likes,
+    source: :liker
+  
 end

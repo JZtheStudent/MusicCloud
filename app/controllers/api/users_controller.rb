@@ -37,6 +37,15 @@ class Api::UsersController < ApplicationController
       render json: @user.errors.full_messages, status: 404
     end
   end
+  
+  def liked_tracks
+    @user = User.find_by(id: params[:id])
+    if @user 
+      render :show_liked_tracks
+    else
+      render json: @user.errors.full_messages, status: 404
+    end
+  end
 
 
   private

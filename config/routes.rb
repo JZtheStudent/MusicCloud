@@ -9,10 +9,13 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :tracks, only: [:index, :show, :create, :destroy] do 
       resources :comments, only: [:index]
+      resources :likes, only: [:index]
     end
     resources :comments, only: [:create, :destroy]
-    
+    resources :likes, only: [:create, :destroy]
+
     get "/users/:id/tracks", to: 'users#tracks'
+    get "/users/:id/liked_tracks", to: 'users#liked_tracks'
   end
   
   

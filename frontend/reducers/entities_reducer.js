@@ -4,13 +4,15 @@ import tracksReducer from "./tracks_reducer";
 import userTracksReducer from "./user_tracks_reducer"; 
 import trackShowReducer from "./track_show_reducer";
 import commentsReducer from "./comments_reducer";
+import likesReducer from "./likes_reducer";
 
 const entitiesReducer = combineReducers({
     user: usersReducer,
     trackIndex: tracksReducer,
     trackShow: trackShowReducer,
     userTracks: userTracksReducer,
-    comments: commentsReducer
+    comments: commentsReducer,
+    likes: likesReducer
 });
 
 export default entitiesReducer;

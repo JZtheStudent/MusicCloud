@@ -3,6 +3,7 @@ import {withRouter} from 'react-router';
 import TrackShowHeaderContainer from './track_show_header_container';
 import TrackShowCommentFormContainer from './track_show_comment_form_container';
 import TrackShowCommentContainer from './track_show_comment_container';
+import LikeContainer from './like_container';
 import {FaComment} from 'react-icons/fa';
 
 class TrackShow extends React.Component {
@@ -45,7 +46,9 @@ class TrackShow extends React.Component {
           </div>
           
           <div className="track-show-comments-section">
-            <h1><FaComment />&nbsp; {comments.length} {comments.length === 1 ? 'Comment' : 'Comments'}</h1>
+            <h1><LikeContainer track={track} currentUser={currentUser}/>&nbsp;
+            <FaComment />&nbsp;{comments.length} {comments.length === 1 ? 'Comment' : 'Comments'}
+            </h1>
             {
               comments.map((comment, idx) => (
                 <TrackShowCommentContainer currentUser={currentUser} comment={comment} key={idx}/>

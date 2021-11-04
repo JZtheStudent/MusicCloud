@@ -23,3 +23,9 @@ export const fetchUserTracks = userId => (
     method: 'GET'
   })
 );
+
+export const fetchLikedTracks = userId => (
+  $.ajax({
+    url: `api/users/${userId}`
+  })
+)
