@@ -1,15 +1,25 @@
 import React from 'react';
-import LibraryNavContainer from './library_nav_container';
+import TrackIndex from '../track_index/track_index';
 
 class Library extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {  }
+  
+  componentDidMount() {
+    this.props.fetchLikedTracks(this.props.currentUser.id);
   }
+
   render() { 
     return ( 
       <div className="discover-page-container">
-        <h1 className="discover-header">COMING SOON</h1>
+        <ul className="discover-page-list">
+          {
+            this.props.likedTracks.map(track => (
+              <TrackIndex 
+                key={track.id}
+                track={track}
+                play={this.props.receiveCurrentTrack}/>
+            ))
+          }
+        </ul>
       </div>
       
     );
