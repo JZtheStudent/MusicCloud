@@ -11,6 +11,7 @@ class TrackShow extends React.Component {
     const id = this.props.match.params.id;
     this.props.fetchTrack(id);
     this.props.fetchComments(id);
+    this.props.fetchLikes(id);
     if (this.props.currentUser) this.props.fetchUser(this.props.currentUser.id);
   }
   
@@ -28,7 +29,7 @@ class TrackShow extends React.Component {
   )
   
   render() { 
-    const {track, currentUser, comments} = this.props;
+    const {track, currentUser, comments, likes} = this.props;
     if (!track) return null;
     return ( 
       <div>
@@ -46,7 +47,7 @@ class TrackShow extends React.Component {
           </div>
           
           <div className="track-show-comments-section">
-            <h1><LikeContainer track={track} currentUser={currentUser}/>&nbsp;
+            <h1><LikeContainer track={track} currentUser={currentUser} likes={likes}/>&nbsp;
             <FaComment />&nbsp;{comments.length} {comments.length === 1 ? 'Comment' : 'Comments'}
             </h1>
             {

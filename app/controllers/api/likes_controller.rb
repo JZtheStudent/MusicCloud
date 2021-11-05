@@ -6,11 +6,19 @@ class Api::LikesController < ApplicationController
   end
 
   def create
-
+    @like = Like.new(like_params)
+    if @like.save 
+    else  
+      render json: ['Invalid params for like'], status: 422
+    end
   end
 
   def destroy 
-
+    @like = Like.find(params[:id])
+    if @like.destroy 
+    else  
+      render json: @like.errors.full_messages, status: 401
+    end
   end
 
   private

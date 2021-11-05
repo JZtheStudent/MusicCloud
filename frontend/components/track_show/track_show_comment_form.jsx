@@ -12,9 +12,6 @@ const TrackShowCommentForm = (props) => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(input);
-    // console.log(props.track.id);
-    // console.log(props.currentUser.id);
     props.createComment({
       commenter_id: props.currentUser.id,
       track_id: props.track.id,

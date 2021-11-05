@@ -20,6 +20,10 @@
   color: red;
 }
 
+.liked:hover {
+  opacity: 50%;
+}
+
 .not-liked {
   cursor: pointer;
 }
